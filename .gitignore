@@ -2,3 +2,21 @@
 .direnv/
 .pre-commit-config.yaml
 result
+
+# KiCad cache / temporary files
+fp-info-cache
+*-backups/
+*.bak
+*.bck
+*.000
+*~
+_autosave-*
+*.tmp
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-save.kicad_pcb
+*-save.kicad_sch
+*-save.pro
+
+# KiCad local UI/session state
+*.kicad_prl
