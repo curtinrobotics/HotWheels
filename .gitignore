@@ -20,3 +20,4 @@ _autosave-*
 
 # KiCad local UI/session state
 *.kicad_prl
+~*.lck
