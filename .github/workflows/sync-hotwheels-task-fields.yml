@@ -15,9 +15,11 @@ jobs:
   sync-project-fields:
     if: contains(github.event.issue.body, '<!-- hotwheels-task-form -->')
     runs-on: ubuntu-latest
+    env:
+      PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
     steps:
       - name: Check project token
-        if: ${{ secrets.PROJECTS_TOKEN == '' }}
+        if: ${{ env.PROJECTS_TOKEN == '' }}
         run: |
           echo "::error::Configure the PROJECTS_TOKEN repository secret with project access before using the HotWheels task form."
           exit 1

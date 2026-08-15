@@ -1,8 +1,6 @@
 name: HotWheels Task
 description: Capture a task and place it on the Hot Wheels RC project board.
 title: "[Task] "
-projects:
-  - curtinrobotics/2
 body:
   - type: markdown
     attributes:
