@@ -1,0 +1,63 @@
+name: HotWheels Task
+description: Capture a task and place it on the Hot Wheels RC project board.
+title: "[Task] "
+projects:
+  - curtinrobotics/2
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <!-- hotwheels-task-form -->
+        Use this form for work that should be tracked on the Hot Wheels RC project board.
+
+  - type: textarea
+    id: task
+    attributes:
+      label: What needs to be done?
+      description: Describe the work clearly enough for someone else to pick it up.
+      placeholder: Explain the task, relevant context, and any constraints.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: How will we know it is complete?
+      description: Add acceptance criteria, verification steps, or a reference to the relevant design.
+      placeholder: List the observable result or checks that should be satisfied.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Select the Project Priority value for this task.
+      options:
+        - P1
+        - P2
+        - P3
+        - P4
+    validations:
+      required: true
+
+  - type: dropdown
+    id: purchase
+    attributes:
+      label: Purchase
+      description: Select Yes when this task requires purchasing something; otherwise leave it unset.
+      options:
+        - No
+        - Yes
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References or attachments
+      description: Add links, part numbers, photos, or other useful references.
+      placeholder: Paste links or drag files here.
+    validations:
+      required: false

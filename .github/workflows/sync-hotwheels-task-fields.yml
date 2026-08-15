@@ -1,0 +1,192 @@
+name: Sync HotWheels task fields
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  sync-project-fields:
+    if: contains(github.event.issue.body, '<!-- hotwheels-task-form -->')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check project token
+        if: ${{ secrets.PROJECTS_TOKEN == '' }}
+        run: |
+          echo "::error::Configure the PROJECTS_TOKEN repository secret with project access before using the HotWheels task form."
+          exit 1
+
+      - name: Add the issue and sync Project V2 fields
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PROJECTS_TOKEN }}
+          script: |
+            const projectNumber = 2;
+            const issueBody = context.payload.issue.body || '';
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issueNumber = context.issue.number;
+
+            const extractAnswer = (label) => {
+              const heading = new RegExp(`^### ${label}\\s*\\n([\\s\\S]*?)(?=^### |$)`, 'm');
+              const match = issueBody.match(heading);
+              return match ? match[1].trim() : '';
+            };
+
+            const priority = extractAnswer('Priority');
+            const purchase = extractAnswer('Purchase');
+            if (!priority || !purchase) {
+              core.setFailed('The task form is missing the Priority or Purchase answer.');
+              return;
+            }
+
+            const data = await github.graphql(
+              `query($owner: String!, $repo: String!, $issueNumber: Int!, $projectNumber: Int!) {
+                repository(owner: $owner, name: $repo) {
+                  issue(number: $issueNumber) {
+                    id
+                  }
+                }
+                organization(login: $owner) {
+                  projectV2(number: $projectNumber) {
+                    id
+                    title
+                    fields(first: 100) {
+                      nodes {
+                        __typename
+                        ... on ProjectV2SingleSelectField {
+                          id
+                          name
+                          options {
+                            id
+                            name
+                          }
+                        }
+                      }
+                    }
+                    items(first: 100) {
+                      nodes {
+                        id
+                        content {
+                          __typename
+                          ... on Issue {
+                            id
+                            number
+                            repository {
+                              nameWithOwner
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }`,
+              { owner, repo, issueNumber, projectNumber },
+            );
+
+            const issue = data.repository?.issue;
+            const project = data.organization?.projectV2;
+            if (!issue) {
+              core.setFailed(`Issue #${issueNumber} could not be loaded.`);
+              return;
+            }
+            if (!project) {
+              core.setFailed(`Organization project ${owner}/${projectNumber} could not be loaded.`);
+              return;
+            }
+
+            const fields = project.fields.nodes.filter((field) => field?.id && field?.name);
+            const fieldByName = (name) => fields.find((field) => field.name === name);
+            const optionByName = (field, name) => field?.options?.find((option) => option.name === name);
+            const statusField = fieldByName('Status');
+            const priorityField = fieldByName('Priority');
+            const purchaseField = fieldByName('Purchase');
+            const inboxOption = optionByName(statusField, 'Inbox');
+            const priorityOption = optionByName(priorityField, priority);
+            const purchaseOption = optionByName(purchaseField, 'Yes');
+
+            for (const [fieldName, field] of Object.entries({ Status: statusField, Priority: priorityField, Purchase: purchaseField })) {
+              if (!field) {
+                core.setFailed(`Project field "${fieldName}" was not found in ${project.title}.`);
+                return;
+              }
+            }
+            for (const [fieldName, option] of Object.entries({ Status: inboxOption, Priority: priorityOption })) {
+              if (!option) {
+                core.setFailed(`Project option for ${fieldName} was not found in ${project.title}.`);
+                return;
+              }
+            }
+            if (purchase === 'Yes' && !purchaseOption) {
+              core.setFailed(`Project option "Yes" was not found for Purchase in ${project.title}.`);
+              return;
+            }
+
+            let item = project.items.nodes.find(
+              (candidate) => candidate.content?.__typename === 'Issue'
+                && candidate.content.number === issueNumber
+                && candidate.content.repository?.nameWithOwner === `${owner}/${repo}`,
+            );
+
+            if (!item) {
+              const added = await github.graphql(
+                `mutation($projectId: ID!, $contentId: ID!) {
+                  addProjectV2ItemById(input: { projectId: $projectId, contentId: $contentId }) {
+                    item {
+                      id
+                    }
+                  }
+                }`,
+                { projectId: project.id, contentId: issue.id },
+              );
+              item = added.addProjectV2ItemById.item;
+            }
+
+            const setSingleSelect = async (fieldId, optionId) => {
+              await github.graphql(
+                `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+                  updateProjectV2ItemFieldValue(
+                    input: {
+                      projectId: $projectId
+                      itemId: $itemId
+                      fieldId: $fieldId
+                      value: { singleSelectOptionId: $optionId }
+                    }
+                  ) {
+                    projectV2Item {
+                      id
+                    }
+                  }
+                }`,
+                { projectId: project.id, itemId: item.id, fieldId, optionId },
+              );
+            };
+
+            await setSingleSelect(statusField.id, inboxOption.id);
+            await setSingleSelect(priorityField.id, priorityOption.id);
+
+            if (purchase === 'Yes') {
+              await setSingleSelect(purchaseField.id, purchaseOption.id);
+            } else {
+              await github.graphql(
+                `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!) {
+                  clearProjectV2ItemFieldValue(
+                    input: { projectId: $projectId, itemId: $itemId, fieldId: $fieldId }
+                  ) {
+                    projectV2Item {
+                      id
+                    }
+                  }
+                }`,
+                { projectId: project.id, itemId: item.id, fieldId: purchaseField.id },
+              );
+            }
+
+            core.info(`Synced issue #${issueNumber} to ${project.title}: Status=Inbox, Priority=${priority}, Purchase=${purchase}.`);
