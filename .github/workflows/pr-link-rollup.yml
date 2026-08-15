@@ -131,8 +131,9 @@ jobs:
               }
             }
 
+            const unmanagedBody = managedBlock ? body.replace(managedBlock, '') : body;
             const bodyReferences = new Set(
-              [...body.matchAll(/(?:close[sd]?|fix(?:e[sd])?|resolv(?:e[sd])?)\s*:?[ \t]*#(\d+)/gi)].map(
+              [...unmanagedBody.matchAll(/(?:close[sd]?|fix(?:e[sd])?|resolv(?:e[sd])?)\s*:?[ \t]*#(\d+)/gi)].map(
                 (match) => Number(match[1]),
               ),
             );
