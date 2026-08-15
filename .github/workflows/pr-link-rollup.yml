@@ -77,11 +77,23 @@ jobs:
             const linkedIssues = pullRequest.closingIssuesReferences.nodes.filter(
               (issue) => issue?.repository?.nameWithOwner === `${owner}/${repo}`,
             );
-            const directlyLinked = new Set(linkedIssues.map((issue) => issue.number));
+            const startMarker = '<!-- pr-link-rollup:start -->';
+            const endMarker = '<!-- pr-link-rollup:end -->';
+            const body = pullRequest.body || '';
+            const managedBlock = body.match(
+              /<!-- pr-link-rollup:start -->[\s\S]*?<!-- pr-link-rollup:end -->/,
+            )?.[0];
+            const managedNumbers = new Set(
+              [...(managedBlock || '').matchAll(/(?:close[sd]?|fix(?:e[sd])?|resolv(?:e[sd])?)\s*:?[ \t]*#(\d+)/gi)].map(
+                (match) => Number(match[1]),
+              ),
+            );
+            const directIssues = linkedIssues.filter((issue) => !managedNumbers.has(issue.number));
+            const directlyLinked = new Set(directIssues.map((issue) => issue.number));
             const ancestors = new Set();
             const walkedParents = new Set();
 
-            for (const linkedIssue of linkedIssues) {
+            for (const linkedIssue of directIssues) {
               let childNumber = linkedIssue.number;
 
               for (let depth = 0; depth < 50; depth += 1) {
@@ -119,17 +131,6 @@ jobs:
               }
             }
 
-            const startMarker = '<!-- pr-link-rollup:start -->';
-            const endMarker = '<!-- pr-link-rollup:end -->';
-            const body = pullRequest.body || '';
-            const managedBlock = body.match(
-              /<!-- pr-link-rollup:start -->[\s\S]*?<!-- pr-link-rollup:end -->/,
-            )?.[0];
-            const managedNumbers = new Set(
-              [...(managedBlock || '').matchAll(/(?:close[sd]?|fix(?:e[sd])?|resolv(?:e[sd])?)\s*:?[ \t]*#(\d+)/gi)].map(
-                (match) => Number(match[1]),
-              ),
-            );
             const bodyReferences = new Set(
               [...body.matchAll(/(?:close[sd]?|fix(?:e[sd])?|resolv(?:e[sd])?)\s*:?[ \t]*#(\d+)/gi)].map(
                 (match) => Number(match[1]),
