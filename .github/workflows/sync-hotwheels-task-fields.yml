@@ -32,6 +32,7 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const issueNumber = context.issue.number;
+            const shouldResetStatus = ['opened', 'reopened'].includes(context.payload.action);
 
             const extractAnswer = (label) => {
               const heading = new RegExp(`^### ${label}\\s*\\n([\\s\\S]*?)(?=^### |$)`, 'm');
@@ -169,7 +170,9 @@ jobs:
               );
             };
 
-            await setSingleSelect(statusField.id, inboxOption.id);
+            if (shouldResetStatus) {
+              await setSingleSelect(statusField.id, inboxOption.id);
+            }
             await setSingleSelect(priorityField.id, priorityOption.id);
 
             if (purchase === 'Yes') {
@@ -189,4 +192,8 @@ jobs:
               );
             }
 
-            core.info(`Synced issue #${issueNumber} to ${project.title}: Status=Inbox, Priority=${priority}, Purchase=${purchase}.`);
+            core.info(
+              `Synced issue #${issueNumber} to ${project.title}: `
+                + `${shouldResetStatus ? 'Status=Inbox, ' : 'Status preserved, '}`
+                + `Priority=${priority}, Purchase=${purchase}.`,
+            );
