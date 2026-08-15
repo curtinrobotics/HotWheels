@@ -10,10 +10,11 @@ on:
       - reopened
       - synchronize
       - ready_for_review
+      - closed
 
 permissions:
   contents: read
-  issues: read
+  issues: write
   pull-requests: write
 
 jobs:
@@ -141,35 +142,59 @@ jobs:
 
             if (missingAncestors.length === 0 && !managedBlock) {
               core.info(`No parent ancestors need to be linked for pull request #${pullNumber}.`);
-              return;
+            } else {
+              const replacementBlock = missingAncestors.length
+                ? [
+                    startMarker,
+                    ...missingAncestors.map((issueNumber) => `Resolves #${issueNumber}`),
+                    endMarker,
+                  ].join('\n')
+                : '';
+              const nextBody = managedBlock
+                ? body.replace(managedBlock, replacementBlock)
+                : `${body.trimEnd()}\n\n${replacementBlock}\n`;
+
+              if (nextBody !== body) {
+                await github.rest.pulls.update({
+                  owner,
+                  repo,
+                  pull_number: pullNumber,
+                  body: nextBody,
+                });
+
+                core.info(
+                  `Updated pull request #${pullNumber} managed ancestor links to: ${missingAncestors
+                    .map((issueNumber) => `#${issueNumber}`)
+                    .join(', ') || 'none'}`,
+                );
+              } else {
+                core.info(`Pull request #${pullNumber} already has the current ancestor links.`);
+              }
             }
 
-            const allManagedNumbers = [...new Set([...managedNumbers, ...missingAncestors])].sort(
-              (a, b) => a - b,
-            );
-            const replacementBlock = [
-              startMarker,
-              ...allManagedNumbers.map((issueNumber) => `Resolves #${issueNumber}`),
-              endMarker,
-            ].join('\n');
-            const nextBody = managedBlock
-              ? body.replace(managedBlock, replacementBlock)
-              : `${body.trimEnd()}\n\n${replacementBlock}\n`;
+            if (context.payload.action === 'closed' && context.payload.pull_request.merged === true) {
+              const managedAncestorNumbers = managedNumbers;
+              const issuesToClose = linkedIssues.filter(
+                (issue) => !managedAncestorNumbers.has(issue.number),
+              );
 
-            if (nextBody === body) {
-              core.info(`Pull request #${pullNumber} is already linked to all native ancestors.`);
-              return;
+              for (const issue of issuesToClose) {
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: issue.number,
+                  state: 'closed',
+                  state_reason: 'completed',
+                });
+              }
+
+              core.info(
+                `Closed user-authored same-repository closing reference issue(s): ${issuesToClose
+                  .map((issue) => `#${issue.number}`)
+                  .join(', ') || 'none'}. Generated ancestor issue(s) were excluded: ${[
+                  ...managedAncestorNumbers,
+                ]
+                  .map((issueNumber) => `#${issueNumber}`)
+                  .join(', ') || 'none'}.`,
+              );
             }
-
-            await github.rest.pulls.update({
-              owner,
-              repo,
-              pull_number: pullNumber,
-              body: nextBody,
-            });
-
-            core.info(
-              `Linked pull request #${pullNumber} to native parent ancestor issue(s): ${missingAncestors
-                .map((issueNumber) => `#${issueNumber}`)
-                .join(', ')}`,
-            );
