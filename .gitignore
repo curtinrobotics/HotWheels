@@ -2,3 +2,6 @@
 .direnv/
 .pre-commit-config.yaml
 result
+
+# Local WiFi credentials / OTA password (do not commit)
+Hot_Wheels_arduino_firmware/wifi_secrets.h

@@ -151,3 +151,63 @@ The repository includes editor settings and tasks in `.vscode/`. Extension choic
 ### Notes on Bluepad32 library
 
 The sketch includes `#include <Bluepad32.h>`. In this setup, the header is provided by the **esp32-bluepad32 platform package** (it bundles the library), so `arduino-cli lib list` may still show “No libraries installed” even though the include resolves.
+
+---
+
+## Wireless flashing (OTA) for ESP32 (Arduino IDE)
+
+This project supports **OTA (Over-The-Air) uploads** so you can flash the board over WiFi after an initial USB upload.
+
+### Board
+
+The Rev A electronics baseline uses an ESP32 D1 Mini with the Bluepad32 ESP32
+platform. Select the board profile that matches the installed ESP32 hardware.
+The selected partition scheme must include OTA support.
+
+For boards with native USB, the first USB upload may require holding the BOOT
+button while connecting or starting the upload.
+
+### 1. One-time setup (USB)
+
+1. Create your local WiFi secrets file:
+   - Copy [Hot_Wheels_arduino_firmware/wifi_secrets.example.h](Hot_Wheels_arduino_firmware/wifi_secrets.example.h) to `Hot_Wheels_arduino_firmware/wifi_secrets.h`.
+
+     ```shell
+     cp Hot_Wheels_arduino_firmware/wifi_secrets.example.h Hot_Wheels_arduino_firmware/wifi_secrets.h
+     ```
+
+   - Fill in the WiFi credentials: `WIFI_SSID` (WiFi network name) and `WIFI_PASSWORD` (optional: `OTA_HOSTNAME`, `OTA_PASSWORD`).
+   - The computer and microcontroller must be on the same network for OTA to function.
+
+2. Arduino IDE settings (menus may vary slightly by ESP32 core version):
+   - Tools → Board: select the board profile matching the installed ESP32 hardware.
+   - Tools → USB CDC On Boot: enable it when supported by the selected board (recommended so `Serial` prints work over USB).
+   - Tools → Flash Size: select the value reported by the board.
+   - Tools → Partition Scheme: choose one that explicitly includes **OTA** (often contains text like “OTA” or “2 OTA”).
+
+3. Upload once over USB:
+   - If upload fails, hold **BOOT (GPIO0)** while connecting USB (or while starting upload), then retry.
+
+### 2. Wireless uploads (after the one-time USB upload)
+
+1. Power the board normally and ensure it connects to your WiFi.
+2. Open Arduino IDE → Tools → Port.
+3. Under **Network ports**, select the board (usually shows `HotWheelsRC` / your `OTA_HOSTNAME` and an IP address).
+4. Click Upload to flash over WiFi.
+
+### Viewing Serial logs while using OTA (no USB)
+
+Arduino IDE can upload over the **Network port**, but it **cannot open Serial Monitor** on that port (you may see: “No monitor available for the port protocol network”).
+
+This firmware mirrors all `Serial.print/println/printf` output to a TCP log stream when WiFi is connected. On macOS, view logs with:
+
+```shell
+nc <board-ip> 2323
+```
+
+The board prints its IP (and the exact `nc` command) at boot.
+
+Troubleshooting:
+
+- If the Network port doesn’t appear, ensure your computer and ESP32 are on the same network and mDNS isn’t blocked (some guest/VLAN networks block discovery).
+- Use Serial Monitor over USB once to confirm it prints the IP address on boot.
