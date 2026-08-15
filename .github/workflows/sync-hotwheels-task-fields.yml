@@ -32,7 +32,6 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const issueNumber = context.issue.number;
-            const shouldResetStatus = ['opened', 'reopened'].includes(context.payload.action);
 
             const extractAnswer = (label) => {
               const heading = new RegExp(`^### ${label}\\s*\\n([\\s\\S]*?)(?=^### |$)`, 'm');
@@ -52,6 +51,19 @@ jobs:
                 repository(owner: $owner, name: $repo) {
                   issue(number: $issueNumber) {
                     id
+                    projectItems(first: 100) {
+                      nodes {
+                        id
+                        project {
+                          id
+                        }
+                        fieldValueByName(name: "Status") {
+                          ... on ProjectV2ItemFieldSingleSelectValue {
+                            name
+                          }
+                        }
+                      }
+                    }
                   }
                 }
                 organization(login: $owner) {
@@ -67,21 +79,6 @@ jobs:
                           options {
                             id
                             name
-                          }
-                        }
-                      }
-                    }
-                    items(first: 100) {
-                      nodes {
-                        id
-                        content {
-                          __typename
-                          ... on Issue {
-                            id
-                            number
-                            repository {
-                              nameWithOwner
-                            }
                           }
                         }
                       }
@@ -130,10 +127,8 @@ jobs:
               return;
             }
 
-            let item = project.items.nodes.find(
-              (candidate) => candidate.content?.__typename === 'Issue'
-                && candidate.content.number === issueNumber
-                && candidate.content.repository?.nameWithOwner === `${owner}/${repo}`,
+            let item = issue.projectItems.nodes.find(
+              (candidate) => candidate.project?.id === project.id,
             );
 
             if (!item) {
@@ -148,6 +143,10 @@ jobs:
                 { projectId: project.id, contentId: issue.id },
               );
               item = added.addProjectV2ItemById.item;
+            }
+            if (!item) {
+              core.setFailed(`Issue #${issueNumber} could not be added to ${project.title}.`);
+              return;
             }
 
             const setSingleSelect = async (fieldId, optionId) => {
@@ -170,7 +169,11 @@ jobs:
               );
             };
 
-            if (shouldResetStatus) {
+            const existingStatus = item.fieldValueByName?.name;
+            const statusMessage = existingStatus
+              ? `Status=${existingStatus} preserved, `
+              : 'Status=Inbox, ';
+            if (!existingStatus) {
               await setSingleSelect(statusField.id, inboxOption.id);
             }
             await setSingleSelect(priorityField.id, priorityOption.id);
@@ -194,6 +197,6 @@ jobs:
 
             core.info(
               `Synced issue #${issueNumber} to ${project.title}: `
-                + `${shouldResetStatus ? 'Status=Inbox, ' : 'Status preserved, '}`
+                + statusMessage
                 + `Priority=${priority}, Purchase=${purchase}.`,
             );
