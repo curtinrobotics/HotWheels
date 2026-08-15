@@ -1,0 +1,175 @@
+name: Roll up linked pull requests
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+      - ready_for_review
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: write
+
+jobs:
+  roll-up-linked-issues:
+    name: Roll up linked issues to native parents
+    runs-on: ubuntu-latest
+    steps:
+      - name: Link the pull request to every native parent ancestor
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pullNumber = context.payload.pull_request?.number;
+
+            if (!pullNumber) {
+              core.setFailed('This workflow must run for a pull_request event.');
+              return;
+            }
+
+            const query = `
+              query($owner: String!, $repo: String!, $number: Int!) {
+                repository(owner: $owner, name: $repo) {
+                  pullRequest(number: $number) {
+                    body
+                    baseRefName
+                    closingIssuesReferences(first: 100) {
+                      nodes {
+                        number
+                        repository {
+                          nameWithOwner
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `;
+
+            const data = await github.graphql(query, {
+              owner,
+              repo,
+              number: pullNumber,
+            });
+            const pullRequest = data.repository.pullRequest;
+
+            if (!pullRequest) {
+              core.setFailed(`Pull request #${pullNumber} was not found.`);
+              return;
+            }
+
+            if (pullRequest.baseRefName !== context.payload.repository.default_branch) {
+              core.info(
+                `Skipping pull request #${pullNumber}: native keyword links only apply to the default branch.`,
+              );
+              return;
+            }
+
+            const linkedIssues = pullRequest.closingIssuesReferences.nodes.filter(
+              (issue) => issue?.repository?.nameWithOwner === `${owner}/${repo}`,
+            );
+            const directlyLinked = new Set(linkedIssues.map((issue) => issue.number));
+            const ancestors = new Set();
+            const walkedParents = new Set();
+
+            for (const linkedIssue of linkedIssues) {
+              let childNumber = linkedIssue.number;
+
+              for (let depth = 0; depth < 50; depth += 1) {
+                let parent;
+
+                try {
+                  const response = await github.request(
+                    'GET /repos/{owner}/{repo}/issues/{issue_number}/parent',
+                    {
+                      owner,
+                      repo,
+                      issue_number: childNumber,
+                      headers: {
+                        'X-GitHub-Api-Version': '2022-11-28',
+                      },
+                    },
+                  );
+                  parent = response.data;
+                } catch (error) {
+                  if (error.status === 404) {
+                    break;
+                  }
+                  throw error;
+                }
+
+                if (!parent?.number || walkedParents.has(parent.number)) {
+                  break;
+                }
+
+                walkedParents.add(parent.number);
+                if (!directlyLinked.has(parent.number)) {
+                  ancestors.add(parent.number);
+                }
+                childNumber = parent.number;
+              }
+            }
+
+            const startMarker = '<!-- pr-link-rollup:start -->';
+            const endMarker = '<!-- pr-link-rollup:end -->';
+            const body = pullRequest.body || '';
+            const managedBlock = body.match(
+              /<!-- pr-link-rollup:start -->[\s\S]*?<!-- pr-link-rollup:end -->/,
+            )?.[0];
+            const managedNumbers = new Set(
+              [...(managedBlock || '').matchAll(/(?:close[sd]?|fix(?:e[sd])?|resolv(?:e[sd])?)\s*:?[ \t]*#(\d+)/gi)].map(
+                (match) => Number(match[1]),
+              ),
+            );
+            const bodyReferences = new Set(
+              [...body.matchAll(/(?:close[sd]?|fix(?:e[sd])?|resolv(?:e[sd])?)\s*:?[ \t]*#(\d+)/gi)].map(
+                (match) => Number(match[1]),
+              ),
+            );
+            const missingAncestors = [...ancestors]
+              .filter((issueNumber) => !directlyLinked.has(issueNumber))
+              .filter((issueNumber) => !bodyReferences.has(issueNumber))
+              .sort((a, b) => a - b);
+
+            if (missingAncestors.length === 0 && !managedBlock) {
+              core.info(`No parent ancestors need to be linked for pull request #${pullNumber}.`);
+              return;
+            }
+
+            const allManagedNumbers = [...new Set([...managedNumbers, ...missingAncestors])].sort(
+              (a, b) => a - b,
+            );
+            const replacementBlock = [
+              startMarker,
+              ...allManagedNumbers.map((issueNumber) => `Resolves #${issueNumber}`),
+              endMarker,
+            ].join('\n');
+            const nextBody = managedBlock
+              ? body.replace(managedBlock, replacementBlock)
+              : `${body.trimEnd()}\n\n${replacementBlock}\n`;
+
+            if (nextBody === body) {
+              core.info(`Pull request #${pullNumber} is already linked to all native ancestors.`);
+              return;
+            }
+
+            await github.rest.pulls.update({
+              owner,
+              repo,
+              pull_number: pullNumber,
+              body: nextBody,
+            });
+
+            core.info(
+              `Linked pull request #${pullNumber} to native parent ancestor issue(s): ${missingAncestors
+                .map((issueNumber) => `#${issueNumber}`)
+                .join(', ')}`,
+            );
