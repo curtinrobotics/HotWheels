@@ -5,8 +5,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     arduino-nix.url = "github:bouk/arduino-nix";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     arduino-index = {
       url = "github:bouk/arduino-indexes";
       flake = false;
@@ -72,100 +78,123 @@
 
         globalExcludes = [ ".direnv/**" ];
 
-        markdownlintConfig = pkgs.writeText "hot-wheels.markdownlint-cli2.jsonc" (
-          builtins.toJSON {
-            config = {
-              MD010.code_blocks = false;
-              MD013 = false;
-            };
-          }
-        );
+        markdownOptions = [
+          "--disable"
+          "MD010,MD013"
+        ];
 
-        markdownlintExcludeArgs = map (pattern: "!${pattern}") globalExcludes;
+        treefmtFor =
+          includeChecks:
+          treefmt-nix.lib.evalModule pkgs {
+            projectRootFile = "flake.nix";
 
-        markdownlint = pkgs.writeShellApplication {
-          name = "markdownlint";
-          runtimeInputs = [ pkgs.markdownlint-cli2 ];
-          text = ''
-            if [ "$#" -eq 0 ]; then
-              set -- "**/*.md" ${pkgs.lib.escapeShellArgs markdownlintExcludeArgs}
-            fi
-            exec markdownlint-cli2 --config ${markdownlintConfig} "$@"
-          '';
-        };
-
-        markdownFormat = pkgs.writeShellApplication {
-          name = "markdown-format";
-          runtimeInputs = [
-            pkgs.markdownlint-cli2
-            pkgs.prettier
-          ];
-          text = ''
-            markdownlint-cli2 --config ${markdownlintConfig} --fix "$@" || true
-            prettier --write "$@"
-            markdownlint-cli2 --config ${markdownlintConfig} "$@"
-          '';
-        };
-
-        markdownlintCheck =
-          pkgs.runCommand "markdownlint-check" { nativeBuildInputs = [ markdownlint ]; }
-            ''
-              cd ${self}
-              markdownlint
-              touch "$out"
-            '';
-
-        treefmtCommon = {
-          projectRootFile = "flake.nix";
-          settings.global.excludes = globalExcludes;
-        };
-
-        treefmt = treefmt-nix.lib.evalModule pkgs (
-          treefmtCommon
-          // {
             programs = {
               clang-format.enable = true;
+              deadnix.enable = true;
               nixfmt.enable = true;
               prettier = {
                 enable = true;
                 excludes = [ "*.md" ];
               };
-              shellcheck.enable = true;
+              rumdl-check.enable = true;
+              rumdl-format.enable = true;
               shfmt.enable = true;
               statix.enable = true;
-              deadnix.enable = true;
-            };
-
-            settings = treefmtCommon.settings // {
-              formatter.clang-format.includes = [
-                "*.c"
-                "*.cc"
-                "*.cpp"
-                "*.h"
-                "*.hh"
-                "*.hpp"
-                "*.ino"
-              ];
-              formatter.markdown = {
-                command = markdownFormat;
+              typos = {
+                enable = true;
                 includes = [ "*.md" ];
               };
+            }
+            // pkgs.lib.optionalAttrs includeChecks {
+              shellcheck = {
+                enable = true;
+                includes = [
+                  ".envrc"
+                  "**/*.sh"
+                ];
+                severity = "warning";
+              };
+              yamllint = {
+                enable = true;
+                settings = {
+                  extends = "default";
+                  rules = {
+                    comments.min-spaces-from-content = 1;
+                    document-start = "disable";
+                    line-length = "disable";
+                    truthy.check-keys = false;
+                  };
+                };
+              };
             };
-          }
-        );
+
+            settings = {
+              global.excludes = globalExcludes;
+              formatter = {
+                clang-format.includes = [
+                  "*.c"
+                  "*.cc"
+                  "*.cpp"
+                  "*.h"
+                  "*.hh"
+                  "*.hpp"
+                  "*.ino"
+                ];
+                deadnix.priority = 1;
+                statix.priority = 2;
+                nixfmt.priority = 3;
+                rumdl-format = {
+                  options = markdownOptions;
+                  priority = 1;
+                };
+                rumdl-check = {
+                  options = markdownOptions;
+                  priority = 2;
+                };
+                typos.priority = 3;
+              }
+              // pkgs.lib.optionalAttrs includeChecks {
+                actionlint = {
+                  command = pkgs.lib.getExe pkgs.actionlint;
+                  includes = [
+                    ".github/workflows/*.yml"
+                    ".github/workflows/*.yaml"
+                  ];
+                };
+              };
+            };
+          };
+
+        treefmt = treefmtFor false;
 
         preCommit = pre-commit-hooks.lib.${system}.run {
           src = self;
           hooks = {
-            nix-flake-check = {
+            repo-quality = {
               enable = true;
-              name = "nix flake check";
-              entry = "nix flake check";
-              language = "system";
+              name = "Repository formatting and linting";
+              entry = "${pkgs.lib.getExe pkgs.nix} build --no-link .#checks.${system}.repo-quality";
+              files = "\\.(c|cc|cpp|h|hh|hpp|ino|json|md|nix|py|sh|ya?ml)$|^\\.envrc$";
               pass_filenames = false;
+            };
+
+            staged-whitespace = {
+              enable = true;
+              name = "Staged whitespace";
+              entry = "${pkgs.lib.getExe pkgs.git} diff --check --cached";
+              pass_filenames = false;
+              always_run = true;
             };
           };
         };
+
+        formatRepo = pkgs.writeShellScriptBin "fmt" ''
+          exec ${pkgs.lib.getExe treefmt.config.build.wrapper} "$@"
+        '';
+
+        checkRepo = pkgs.writeShellScriptBin "chk" ''
+          exec ${pkgs.lib.getExe pkgs.nix} flake check "$@"
+        '';
 
         arduinoCli =
           let
@@ -317,7 +346,6 @@
           inherit
             firmware
             flash
-            markdownlint
             monitor
             ;
         };
@@ -333,11 +361,13 @@
           packages = [
             arduinoCli
             python3
+            checkRepo
             flash
-            markdownlint
+            formatRepo
             monitor
             pkgs.nixd
             pkgs.nixfmt
+            treefmt.config.build.wrapper
           ];
 
           shellHook = preCommit.shellHook + ''
@@ -368,11 +398,10 @@
         formatter = treefmt.config.build.wrapper;
 
         checks = {
-          formatting = treefmt.config.build.check self;
+          repo-quality = (treefmtFor true).config.build.check self;
           inherit
             arduinoCompileDatabase
             firmware
-            markdownlintCheck
             ;
         };
       }
