@@ -108,7 +108,6 @@
                 ".envrc"
                 "**/*.sh"
               ];
-              severity = "warning";
             };
             yamllint = {
               enable = true;
