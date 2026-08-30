@@ -78,22 +78,6 @@
 
         globalExcludes = [ ".direnv/**" ];
 
-        repoFileExtensions = [
-          "c"
-          "cc"
-          "cpp"
-          "h"
-          "hh"
-          "hpp"
-          "ino"
-          "json"
-          "md"
-          "nix"
-          "sh"
-          "yaml"
-          "yml"
-        ];
-
         markdownOptions = [
           "--disable"
           "MD013"
@@ -182,7 +166,7 @@
               enable = true;
               name = "Repository formatting and linting";
               entry = "${pkgs.lib.getExe pkgs.nix} build --no-link .#checks.${system}.repo-quality";
-              files = "\\.(${pkgs.lib.concatStringsSep "|" repoFileExtensions})$|^\\.envrc$";
+              files = "\\.(c|cc|cpp|h|hh|hpp|ino|json|lock|md|nix|sh|ya?ml)$|^\\.envrc$";
               pass_filenames = false;
             };
 
