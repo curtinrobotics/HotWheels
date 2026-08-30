@@ -78,9 +78,25 @@
 
         globalExcludes = [ ".direnv/**" ];
 
+        repoFileExtensions = [
+          "c"
+          "cc"
+          "cpp"
+          "h"
+          "hh"
+          "hpp"
+          "ino"
+          "json"
+          "md"
+          "nix"
+          "sh"
+          "yaml"
+          "yml"
+        ];
+
         markdownOptions = [
           "--disable"
-          "MD010,MD013"
+          "MD013"
         ];
 
         treefmt = treefmt-nix.lib.evalModule pkgs {
@@ -115,7 +131,6 @@
               settings = {
                 extends = "default";
                 rules = {
-                  comments.min-spaces-from-content = 1;
                   document-start = "disable";
                   line-length = "disable";
                   truthy.check-keys = false;
@@ -125,7 +140,7 @@
           };
 
           settings = {
-            global.excludes = globalExcludes;
+            excludes = globalExcludes;
             formatter = {
               clang-format.includes = [
                 "*.c"
@@ -136,29 +151,25 @@
                 "*.hpp"
                 "*.ino"
               ];
-              deadnix.priority = 1;
-              statix.priority = 2;
-              nixfmt.priority = 3;
-              prettier.priority = 1;
+              statix.priority = 1;
+              nixfmt.priority = 2;
               rumdl-format = {
                 options = markdownOptions;
-                priority = 1;
               };
               rumdl-check = {
                 options = markdownOptions;
                 priority = 2;
               };
-              shfmt.priority = 1;
-              typos.priority = 3;
-              shellcheck.priority = 2;
-              yamllint.priority = 2;
+              typos.priority = 1;
+              shellcheck.priority = 1;
+              yamllint.priority = 1;
               actionlint = {
                 command = pkgs.lib.getExe pkgs.actionlint;
                 includes = [
                   ".github/workflows/*.yml"
                   ".github/workflows/*.yaml"
                 ];
-                priority = 2;
+                priority = 1;
               };
             };
           };
@@ -171,7 +182,7 @@
               enable = true;
               name = "Repository formatting and linting";
               entry = "${pkgs.lib.getExe pkgs.nix} build --no-link .#checks.${system}.repo-quality";
-              files = "\\.(c|cc|cpp|h|hh|hpp|ino|json|md|nix|py|sh|ya?ml)$|^\\.envrc$";
+              files = "\\.(${pkgs.lib.concatStringsSep "|" repoFileExtensions})$|^\\.envrc$";
               pass_filenames = false;
             };
 
