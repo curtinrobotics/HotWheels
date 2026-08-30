@@ -124,15 +124,15 @@ If the board does not enter upload mode automatically, hold its **BOOT** button 
 
 ### Development checks
 
-The flake provides formatting, linting, and firmware compilation checks:
+The flake provides repository-wide maintenance and checks:
 
 ```sh
-# Format supported files and apply automatic fixes
+# Fix and validate the repository
 nix fmt
 # or, from the development shell
 fmt
 
-# Check formatting, linting, workflows, and firmware compilation
+# Check the repository
 nix flake check
 # or, from the development shell
 chk
@@ -143,7 +143,7 @@ nix run .#flash -- "$PORT"
 nix run .#monitor -- "$PORT"
 ```
 
-The development shell installs pre-commit hooks for repository-quality checks and staged whitespace without rebuilding the firmware on every commit.
+The development shell also installs repository checks as pre-commit hooks.
 
 ### VS Code workflow
 

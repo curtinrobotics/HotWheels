@@ -83,94 +83,86 @@
           "MD010,MD013"
         ];
 
-        treefmtFor =
-          includeChecks:
-          treefmt-nix.lib.evalModule pkgs {
-            projectRootFile = "flake.nix";
+        treefmt = treefmt-nix.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
 
-            programs = {
-              clang-format.enable = true;
-              deadnix.enable = true;
-              nixfmt.enable = true;
-              prettier = {
-                enable = true;
-                excludes = [ "*.md" ];
-              };
-              rumdl-check.enable = true;
-              rumdl-format.enable = true;
-              shfmt.enable = true;
-              statix.enable = true;
-              typos = {
-                enable = true;
-                includes = [ "*.md" ];
-              };
-            }
-            // pkgs.lib.optionalAttrs includeChecks {
-              shellcheck = {
-                enable = true;
-                includes = [
-                  ".envrc"
-                  "**/*.sh"
-                ];
-                severity = "warning";
-              };
-              yamllint = {
-                enable = true;
-                settings = {
-                  extends = "default";
-                  rules = {
-                    comments.min-spaces-from-content = 1;
-                    document-start = "disable";
-                    line-length = "disable";
-                    truthy.check-keys = false;
-                  };
-                };
-              };
+          programs = {
+            clang-format.enable = true;
+            deadnix.enable = true;
+            nixfmt.enable = true;
+            prettier = {
+              enable = true;
+              excludes = [ "*.md" ];
             };
-
-            settings = {
-              global.excludes = globalExcludes;
-              formatter = {
-                clang-format.includes = [
-                  "*.c"
-                  "*.cc"
-                  "*.cpp"
-                  "*.h"
-                  "*.hh"
-                  "*.hpp"
-                  "*.ino"
-                ];
-                deadnix.priority = 1;
-                statix.priority = 2;
-                nixfmt.priority = 3;
-                prettier.priority = 1;
-                rumdl-format = {
-                  options = markdownOptions;
-                  priority = 1;
-                };
-                rumdl-check = {
-                  options = markdownOptions;
-                  priority = 2;
-                };
-                shfmt.priority = 1;
-                typos.priority = 3;
-              }
-              // pkgs.lib.optionalAttrs includeChecks {
-                shellcheck.priority = 2;
-                yamllint.priority = 2;
-                actionlint = {
-                  command = pkgs.lib.getExe pkgs.actionlint;
-                  includes = [
-                    ".github/workflows/*.yml"
-                    ".github/workflows/*.yaml"
-                  ];
-                  priority = 2;
+            rumdl-check.enable = true;
+            rumdl-format.enable = true;
+            shfmt.enable = true;
+            statix.enable = true;
+            typos = {
+              enable = true;
+              includes = [ "*.md" ];
+            };
+            shellcheck = {
+              enable = true;
+              includes = [
+                ".envrc"
+                "**/*.sh"
+              ];
+              severity = "warning";
+            };
+            yamllint = {
+              enable = true;
+              settings = {
+                extends = "default";
+                rules = {
+                  comments.min-spaces-from-content = 1;
+                  document-start = "disable";
+                  line-length = "disable";
+                  truthy.check-keys = false;
                 };
               };
             };
           };
 
-        treefmt = treefmtFor true;
+          settings = {
+            global.excludes = globalExcludes;
+            formatter = {
+              clang-format.includes = [
+                "*.c"
+                "*.cc"
+                "*.cpp"
+                "*.h"
+                "*.hh"
+                "*.hpp"
+                "*.ino"
+              ];
+              deadnix.priority = 1;
+              statix.priority = 2;
+              nixfmt.priority = 3;
+              prettier.priority = 1;
+              rumdl-format = {
+                options = markdownOptions;
+                priority = 1;
+              };
+              rumdl-check = {
+                options = markdownOptions;
+                priority = 2;
+              };
+              shfmt.priority = 1;
+              typos.priority = 3;
+              shellcheck.priority = 2;
+              yamllint.priority = 2;
+              actionlint = {
+                command = pkgs.lib.getExe pkgs.actionlint;
+                includes = [
+                  ".github/workflows/*.yml"
+                  ".github/workflows/*.yaml"
+                ];
+                priority = 2;
+              };
+            };
+          };
+        };
 
         preCommit = pre-commit-hooks.lib.${system}.run {
           src = self;
@@ -403,7 +395,7 @@
         formatter = treefmt.config.build.wrapper;
 
         checks = {
-          repo-quality = (treefmtFor true).config.build.check self;
+          repo-quality = treefmt.config.build.check self;
           inherit
             arduinoCompileDatabase
             firmware
