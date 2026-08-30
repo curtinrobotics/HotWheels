@@ -143,6 +143,7 @@
                 deadnix.priority = 1;
                 statix.priority = 2;
                 nixfmt.priority = 3;
+                prettier.priority = 1;
                 rumdl-format = {
                   options = markdownOptions;
                   priority = 1;
@@ -151,21 +152,25 @@
                   options = markdownOptions;
                   priority = 2;
                 };
+                shfmt.priority = 1;
                 typos.priority = 3;
               }
               // pkgs.lib.optionalAttrs includeChecks {
+                shellcheck.priority = 2;
+                yamllint.priority = 2;
                 actionlint = {
                   command = pkgs.lib.getExe pkgs.actionlint;
                   includes = [
                     ".github/workflows/*.yml"
                     ".github/workflows/*.yaml"
                   ];
+                  priority = 2;
                 };
               };
             };
           };
 
-        treefmt = treefmtFor false;
+        treefmt = treefmtFor true;
 
         preCommit = pre-commit-hooks.lib.${system}.run {
           src = self;
