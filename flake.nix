@@ -76,7 +76,10 @@
           inherit system overlays;
         };
 
-        globalExcludes = [ ".direnv/**" ];
+        globalExcludes = [
+          ".direnv/**"
+          "Hot_Wheels_Electronics/libraries/**"
+        ];
 
         markdownOptions = [
           "--disable"
