@@ -29,9 +29,7 @@
       "label": "Arduino: flash firmware",
       "type": "shell",
       "command": "nix run .#flash -- \"${input:serialPort}\"",
-      "dependsOn": [
-        "Nix: build firmware"
-      ],
+      "dependsOn": ["Nix: build firmware"],
       "dependsOrder": "sequence",
       "problemMatcher": []
     },

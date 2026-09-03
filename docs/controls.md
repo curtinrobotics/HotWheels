@@ -16,4 +16,4 @@ D-pad up: reset trim
 
 LB/L1 + RB/R1 + D-pad up: factory reset saved trim
 
-*Note: steering trim is saved and restored after reboot.*
+_Note: steering trim is saved and restored after reboot._
