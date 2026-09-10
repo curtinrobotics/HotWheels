@@ -62,7 +62,7 @@ Run idf.py menuconfig and check:
 Initialise usb host driver:
 
 - `idf.py menuconfig`
-  - Component config -> USB Stack -> Enable USB Host functionality
+- Component config -> USB Stack -> Enable USB Host functionality
 
 ## Controller Mapping
 
