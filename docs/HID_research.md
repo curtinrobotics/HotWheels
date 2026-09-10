@@ -59,12 +59,10 @@ Run idf.py menuconfig and check:
 - You do not want the TinyUSB/CDC device-mode options here — that's for when the ESP32-S3 acts as a USB device, not a host. Host mode uses the separate usb_host driver.
 - Confirm CONFIG_IDF_TARGET_ESP32S3=y in sdkconfig.
 
-2. Initialise usb host driver
+Initialise usb host driver:
 
 - `idf.py menuconfig`
   - Component config -> USB Stack -> Enable USB Host functionality
-
-3.
 
 ## Controller Mapping
 
