@@ -2,6 +2,7 @@
 # Controller ESP-32 Communication
 
 1. Add esp-idf to nix file
+
  ```bash
 # flake.nix
 {
@@ -28,8 +29,9 @@
       };
     };
 }
- 
+
  ```
+
 Run nix deveand confirm with idf.py --version. This sidesteps the usual install.sh / export.sh dance since Nix wires up the toolchain paths for you.
 
 (If that flake's ESP-IDF version is older than you want, alternative: use Nix only for system deps — cmake, ninja, python, the Xtensa toolchain package — and clone ESP-IDF yourself, running its own install.sh/export.sh inside the Nix shell. More manual, but decouples you from the flake's release cadence.)
@@ -50,6 +52,7 @@ dependencies:
   espressif/usb_host_hid: "*"
   idf: ">=5.0"
 ```
+
 Then idf.py reconfigure — it'll fetch the component automatically (needs network access; if your Nix sandbox blocks it, run this step outside the pure sandbox or vendor the component locally).
 
 Run idf.py menuconfig and check:
@@ -59,12 +62,14 @@ Run idf.py menuconfig and check:
 - Confirm CONFIG_IDF_TARGET_ESP32S3=y in sdkconfig.
 
 2. Initialise usb host driver
+
 - `idf.py menuconfig`
-    - Component config -> USB Stack -> Enable USB Host functionality
-3. 
+  - Component config -> USB Stack -> Enable USB Host functionality
 
+3.
 
-# Controller Mapping
+## Controller Mapping
+
 📊 Mapping the PS5 Raw HID Packet StructureBy default, when a PS5 controller connects via wire, it sends 64-byte input reports (Report ID Over USB, the DualSense sends a 64-byte input report (report ID 0x01) containing:
 
 Left/right stick X/Y (bytes 1–4)
@@ -73,12 +78,14 @@ A counter byte
 Buttons packed into bits (face buttons, D-pad as a 4-bit hat, shoulder buttons, stick clicks, share/options/PS/touchpad-click)
 Trigger feedback status, battery, gyro/accelerometer (6-axis, 2 bytes each), and touchpad finger coordinates further in the buffer
 
-# Build/Flash
+## Build/Flash
 
 ```bash
 idf.py build
 idf.py -p /dev/ttyACMO flash monitor
 
+
+```
 
 ```cpp
 /*
