@@ -1,8 +1,8 @@
 # Controller ESP-32 Communication
 
-1. Add esp-idf to nix file
+Add esp-idf input to the flake
 
- ```bash
+```nix
 # flake.nix
 {
   inputs = {
@@ -28,8 +28,7 @@
       };
     };
 }
-
- ```
+```
 
 Run nix deveand confirm with idf.py --version. This sidesteps the usual install.sh / export.sh dance since Nix wires up the toolchain paths for you.
 
