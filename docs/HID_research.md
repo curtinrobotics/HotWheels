@@ -30,9 +30,9 @@ Add esp-idf input to the flake
 }
 ```
 
-Run nix deveand confirm with idf.py --version. This sidesteps the usual install.sh / export.sh dance since Nix wires up the toolchain paths for you.
+Run `nix develop` and confirm with `idf.py --version`.
 
-(If that flake's ESP-IDF version is older than you want, alternative: use Nix only for system deps — cmake, ninja, python, the Xtensa toolchain package — and clone ESP-IDF yourself, running its own install.sh/export.sh inside the Nix shell. More manual, but decouples you from the flake's release cadence.)
+_If the flake's ESP-IDF version is older than needed, seek to another flake or packaging dependencies in nix._
 
 ```bash
 idf.py create-project dualsense_host
