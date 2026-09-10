@@ -1,4 +1,3 @@
-
 # Controller ESP-32 Communication
 
 1. Add esp-idf to nix file
