@@ -110,6 +110,14 @@
             typos = {
               enable = true;
               includes = [ "*.md" ];
+              configFile = "${(pkgs.formats.toml { }).generate "typos.toml" {
+                default.extend-words = {
+                  THT = "THT";
+                };
+                default.extend-identifiers = {
+                  DuPont = "DuPont";
+                };
+              }}";
             };
             shellcheck = {
               enable = true;
