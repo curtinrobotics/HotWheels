@@ -4724,7 +4724,7 @@
 	(text_box "microcontroller esp32-s"
 		(exclude_from_sim no)
 		(at 204.47 63.5 0)
-		(size 107.95 95.25)
+		(size 116.84 130.81)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
 			(width 0)
@@ -4894,6 +4894,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ddfb6e53-ec2b-4887-b7bc-798b12e2ba3a")
+	)
+	(junction
+		(at 226.06 167.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ea9cd6d0-e62b-4769-b996-f4cae125c615")
 	)
 	(junction
 		(at 77.47 156.21)
@@ -5180,6 +5186,16 @@
 			(type default)
 		)
 		(uuid "35a3c64d-0080-45a1-8b96-1f4e17bca856")
+	)
+	(wire
+		(pts
+			(xy 252.73 170.18) (xy 250.19 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3621d652-db17-4bc4-af11-0da10d44e65f")
 	)
 	(wire
 		(pts
@@ -5693,6 +5709,16 @@
 	)
 	(wire
 		(pts
+			(xy 226.06 167.64) (xy 233.68 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9bbd7b8f-6411-4473-af7f-6bfd437a7b09")
+	)
+	(wire
+		(pts
 			(xy 271.78 100.33) (xy 267.97 100.33)
 		)
 		(stroke
@@ -6003,6 +6029,16 @@
 	)
 	(wire
 		(pts
+			(xy 250.19 170.18) (xy 250.19 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f4fdf2be-a8eb-4c16-b165-3901c9045702")
+	)
+	(wire
+		(pts
 			(xy 53.34 156.21) (xy 53.34 158.75)
 		)
 		(stroke
@@ -6211,6 +6247,16 @@
 		)
 		(uuid "88b869df-24c0-4598-be50-ce491f43fd97")
 	)
+	(label "esp_reset"
+		(at 233.68 167.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8b2ef67b-d9d5-44dd-90e0-5f2c1add2099")
+	)
 	(label "imu_mosi"
 		(at 271.78 120.65 0)
 		(effects
@@ -6350,6 +6396,16 @@
 			(justify left bottom)
 		)
 		(uuid "c067ed10-5464-414c-a596-4daea68af157")
+	)
+	(label "esp_boot"
+		(at 252.73 170.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c22eaa35-a5be-4bee-907d-fb13e0cdd73c")
 	)
 	(label "drv_curr_a"
 		(at 271.78 135.89 0)
@@ -6500,6 +6556,84 @@
 			(justify left bottom)
 		)
 		(uuid "f5f445f9-a415-499c-9862-23f12c77ae4b")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 226.06 175.26 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "01b56f40-ea2d-4803-ba61-03378fb3427d")
+		(property "Reference" "#PWR026"
+			(at 226.06 181.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 226.06 180.34 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 226.06 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 226.06 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0ce0ad3a-2c9b-4962-872b-2aa0e54b8610")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR026")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -7537,6 +7671,88 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 226.06 163.83 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4ca40c12-d6c5-4a19-9ea4-18b2ce414956")
+		(property "Reference" "R6"
+			(at 228.6 162.5599 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10 k"
+			(at 228.6 165.0999 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 224.282 163.83 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 226.06 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "8c0098fc-675c-4698-8608-35b452f2b715")
+		)
+		(pin "1"
+			(uuid "9b988e74-367a-41ed-aa53-83b255dbcc9f")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "R6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 34.29 52.07 0)
 		(unit 1)
@@ -8338,6 +8554,88 @@
 			(project "Hot_Wheels_Electronics"
 				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
 					(reference "#PWR021")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 226.06 171.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "724def51-805f-4e9d-8663-a72f74facde0")
+		(property "Reference" "C5"
+			(at 229.87 170.1799 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1 uF"
+			(at 229.87 172.7199 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 227.0252 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 171.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 226.06 171.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "367dff6a-df23-46cc-81e0-37b9548d0cec")
+		)
+		(pin "2"
+			(uuid "042c09bb-2ead-4518-9a8a-d6f0b34bb0a7")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -9372,6 +9670,88 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 250.19 163.83 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ac1b4723-2168-43cf-8eb1-6ead1cbce84c")
+		(property "Reference" "R7"
+			(at 252.73 162.5599 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10 k"
+			(at 252.73 165.0999 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 248.412 163.83 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 250.19 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 250.19 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "b3ac452d-b8b0-4505-87fb-b09c32938388")
+		)
+		(pin "1"
+			(uuid "d7275662-852c-4aa4-a791-61cbd97a0642")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "R7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 59.69 163.83 0)
 		(unit 1)
 		(body_style 1)
@@ -10034,6 +10414,162 @@
 			(project "Hot_Wheels_Electronics"
 				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
 					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 250.19 160.02 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e44a395f-de1e-4e43-87ab-8d9daca95f6f")
+		(property "Reference" "#PWR027"
+			(at 250.19 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 250.19 154.94 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DFN_QFN:Diodes_UDFN3810-9_TYPE_B"
+			(at 250.19 160.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 250.19 160.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 250.19 160.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c53cac4a-ac58-47f7-8b34-9f430bf52e83")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR027")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 226.06 160.02 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e95e67d3-d497-4bf9-afb7-e136e74e1678")
+		(property "Reference" "#PWR025"
+			(at 226.06 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 226.06 154.94 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 226.06 160.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 160.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 226.06 160.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "97c3d8d7-a830-4a92-8501-1c868686da98")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
