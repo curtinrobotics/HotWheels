@@ -4848,6 +4848,12 @@
 		(uuid "10f5ef5d-6a43-45f8-9ebb-a61235578262")
 	)
 	(junction
+		(at 229.87 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5aaceed6-2282-462d-9830-02043de01d8f")
+	)
+	(junction
 		(at 129.54 121.92)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4944,6 +4950,16 @@
 			(type default)
 		)
 		(uuid "01aca0a5-6109-4ce5-9355-7b87f4601e74")
+	)
+	(wire
+		(pts
+			(xy 229.87 52.07) (xy 231.14 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02fa4680-d0da-4db7-9a98-11e60b593739")
 	)
 	(wire
 		(pts
@@ -5264,6 +5280,16 @@
 			(type default)
 		)
 		(uuid "4711cb93-e6ad-4e53-98a8-91267ef149b1")
+	)
+	(wire
+		(pts
+			(xy 228.6 52.07) (xy 229.87 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "492db433-0977-421f-b35a-1dcfc0d61f69")
 	)
 	(wire
 		(pts
@@ -5817,6 +5843,16 @@
 	)
 	(wire
 		(pts
+			(xy 228.6 49.53) (xy 228.6 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cfaaa0c9-e082-4fe7-9f60-a525f73eb591")
+	)
+	(wire
+		(pts
 			(xy 134.62 151.13) (xy 153.67 151.13)
 		)
 		(stroke
@@ -5834,6 +5870,16 @@
 			(type default)
 		)
 		(uuid "d2aec89c-5872-4d5a-aca9-2989ed39ea25")
+	)
+	(wire
+		(pts
+			(xy 231.14 52.07) (xy 231.14 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d447da89-7eb9-43d0-896b-e4271f2dba2d")
 	)
 	(wire
 		(pts
@@ -8621,7 +8667,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 231.14 49.53 0)
+		(at 229.87 52.07 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8632,7 +8678,7 @@
 		(fields_autoplaced yes)
 		(uuid "870ef756-0600-4030-8520-4803448165f2")
 		(property "Reference" "#PWR019"
-			(at 231.14 55.88 0)
+			(at 229.87 58.42 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8643,7 +8689,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 231.14 54.61 0)
+			(at 229.87 57.15 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8653,7 +8699,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 231.14 49.53 0)
+			(at 229.87 52.07 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8664,7 +8710,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 231.14 49.53 0)
+			(at 229.87 52.07 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8675,7 +8721,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 231.14 49.53 0)
+			(at 229.87 52.07 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10405,14 +10451,17 @@
 	)
 	(group ""
 		(uuid "345d81dd-2384-4244-9d3c-9b4893eeb64e")
-		(members "01aca0a5-6109-4ce5-9355-7b87f4601e74" "09a08a93-8683-443f-8b29-de3845f97932"
-			"2dc8ba58-b076-46c3-a87f-543b95fdac97" "3447b82b-b97b-43af-b96f-6e21590b7fe5"
-			"3c698df9-5ee5-45d0-9333-f032ab9b243e" "56987a5d-d6a9-4c3d-b6bd-b1c7b62d0175"
-			"5c8158d2-1537-4e94-a4fb-e485d6d2c50a" "60f94aa7-73c1-4236-89b3-e49b53b76aef"
-			"625f0615-04b8-4763-992d-0324ef2ead93" "6b7e46e4-e696-4dd0-b8b5-77555a551b9e"
-			"7843d9bf-f7c6-41e4-a3f9-2de5ce7bfc5c" "870ef756-0600-4030-8520-4803448165f2"
-			"88b869df-24c0-4598-be50-ce491f43fd97" "8f7d1760-bc0e-40f8-a86a-d92ca4e2a77a"
-			"912a4eeb-b9ad-456e-ae5e-ee6a94d3d1a3" "a278264c-2ba2-4852-ba92-d82a899408cc"
+		(members "01aca0a5-6109-4ce5-9355-7b87f4601e74" "02fa4680-d0da-4db7-9a98-11e60b593739"
+			"09a08a93-8683-443f-8b29-de3845f97932" "2dc8ba58-b076-46c3-a87f-543b95fdac97"
+			"3447b82b-b97b-43af-b96f-6e21590b7fe5" "3c698df9-5ee5-45d0-9333-f032ab9b243e"
+			"492db433-0977-421f-b35a-1dcfc0d61f69" "56987a5d-d6a9-4c3d-b6bd-b1c7b62d0175"
+			"5aaceed6-2282-462d-9830-02043de01d8f" "5c8158d2-1537-4e94-a4fb-e485d6d2c50a"
+			"60f94aa7-73c1-4236-89b3-e49b53b76aef" "625f0615-04b8-4763-992d-0324ef2ead93"
+			"6b7e46e4-e696-4dd0-b8b5-77555a551b9e" "7843d9bf-f7c6-41e4-a3f9-2de5ce7bfc5c"
+			"870ef756-0600-4030-8520-4803448165f2" "88b869df-24c0-4598-be50-ce491f43fd97"
+			"8f7d1760-bc0e-40f8-a86a-d92ca4e2a77a" "912a4eeb-b9ad-456e-ae5e-ee6a94d3d1a3"
+			"a278264c-2ba2-4852-ba92-d82a899408cc" "cfaaa0c9-e082-4fe7-9f60-a525f73eb591"
+			"d447da89-7eb9-43d0-896b-e4271f2dba2d"
 		)
 	)
 	(group ""
