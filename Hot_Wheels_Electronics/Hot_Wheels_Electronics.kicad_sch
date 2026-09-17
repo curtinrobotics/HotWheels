@@ -9854,7 +9854,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "dfc134fd-59c3-4a81-999e-3a5624943ca7")
 		(property "Reference" "U1"
