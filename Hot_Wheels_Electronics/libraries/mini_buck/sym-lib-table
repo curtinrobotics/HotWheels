@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "MiniBuck")(type "KiCad")(uri "${KIPRJMOD}/MiniBuck.kicad_sym")(options "")(descr "Mini buck converter module symbols"))
+)
