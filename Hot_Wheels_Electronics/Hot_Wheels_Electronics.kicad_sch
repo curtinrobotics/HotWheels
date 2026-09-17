@@ -1849,71 +1849,36 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "QITN_Matek_Micro_BEC:QITN_Matek_Micro_BEC_6-60V_5V9V12V"
+		(symbol "MiniBuck:MiniBuck_3A"
 			(pin_names
-				(offset 1.016)
+				(offset 0.8)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "U4"
-				(at 8.89 1.2701 0)
+			(property "Reference" "U"
+				(at 0 7.62 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "QITN/Matek Micro BEC 6-60V to 5V/9V/12V"
-				(at 8.89 -1.2699 0)
+			(property "Value" "MiniBuck_3A"
+				(at 0 6.096 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Footprint" "QITN_Matek_Micro_BEC:BEC_QITN_Matek_Micro_18x16mm_Castellated"
-				(at 0 -12.7 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" "https://www.mateksys.com/?portfolio=mbec12s"
-				(at 0 -15.24 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Micro BEC module, 6-60V input, selectable 5V/9V/12V output. Pads: OUT, GND, GND, IN."
-				(at 3.048 -9.652 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "BEC buck regulator 6-60V 5V 9V 12V QITN Matek mBEC12S"
+			(property "Footprint" "MiniBuck:MiniBuck_CN3903_17.5x12mm"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1924,104 +1889,141 @@
 					)
 				)
 			)
-			(symbol "QITN_Matek_Micro_BEC_6-60V_5V9V12V_0_1"
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Mini fixed-output non-isolated buck converter module; 17.5 x 12 x 4.3 mm; output voltage is selected by purchased module variant"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "VOUT" "3.3 V"
+				(at 0 -1.27 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.016 1.016)
+						(thickness 0.1524)
+					)
+				)
+			)
+			(property "Module Size" "17.5 x 12 x 4.3 mm"
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.016 1.016)
+					)
+				)
+			)
+			(symbol "MiniBuck_3A_0_1"
 				(rectangle
-					(start -7.62 7.62)
-					(end 7.62 -7.62)
+					(start -7.62 5.08)
+					(end 7.62 -5.08)
 					(stroke
-						(width 0.254)
+						(width 0)
 						(type default)
 					)
 					(fill
 						(type background)
 					)
 				)
-				(text "5/9/12V OUT"
-					(at -1.016 3.048 0)
+				(text "BUCK"
+					(at 0 1.27 0)
 					(effects
 						(font
-							(size 1.016 1.016)
-						)
-					)
-				)
-				(text "6-60V IN"
-					(at 0 -5.08 0)
-					(effects
-						(font
-							(size 1.016 1.016)
+							(size 1.27 1.27)
+							(thickness 0.2032)
 						)
 					)
 				)
 			)
-			(symbol "QITN_Matek_Micro_BEC_6-60V_5V9V12V_1_1"
-				(pin power_out line
-					(at -12.7 5.08 0)
-					(length 5.08)
-					(name "OUT"
+			(symbol "MiniBuck_3A_1_1"
+				(pin passive line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "VIN-"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 1.016 1.016)
 							)
 						)
 					)
 					(number "1"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 1.016 1.016)
 							)
 						)
 					)
 				)
 				(pin power_in line
-					(at -12.7 0 0)
-					(length 5.08)
-					(name "GND"
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "VIN+"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 1.016 1.016)
 							)
 						)
 					)
 					(number "2"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 1.016 1.016)
 							)
 						)
 					)
 				)
-				(pin power_in line
-					(at -12.7 -2.54 0)
-					(length 5.08)
-					(name "GND"
+				(pin passive line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "VOUT-"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 1.016 1.016)
 							)
 						)
 					)
 					(number "3"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 1.016 1.016)
 							)
 						)
 					)
 				)
-				(pin power_in line
-					(at -12.7 -5.08 0)
-					(length 5.08)
-					(name "IN"
+				(pin power_out line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "VOUT+"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 1.016 1.016)
 							)
 						)
 					)
 					(number "4"
 						(effects
 							(font
-								(size 1.27 1.27)
+								(size 1.016 1.016)
 							)
 						)
 					)
@@ -4446,6 +4448,145 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:+6V"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "+6V"
+				(at 0 3.556 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"+6V\""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "+6V_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "+6V_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:+BATT"
 			(power global)
 			(pin_numbers
@@ -4804,7 +4945,7 @@
 	(text_box "power"
 		(exclude_from_sim no)
 		(at 20.32 16.51 0)
-		(size 85.09 45.72)
+		(size 85.09 48.26)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
 			(width 0)
@@ -4866,10 +5007,10 @@
 		(uuid "65eb1e2b-ed18-42d3-a20e-e46937014d41")
 	)
 	(junction
-		(at 68.58 41.91)
+		(at 63.5 57.15)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "6f97644c-59c8-4740-977f-a666882a740a")
+		(uuid "6af206bb-dbb2-4dbb-a7a3-9b2c947c8039")
 	)
 	(junction
 		(at 171.45 38.1)
@@ -4884,10 +5025,28 @@
 		(uuid "7843d9bf-f7c6-41e4-a3f9-2de5ce7bfc5c")
 	)
 	(junction
+		(at 63.5 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "827bc924-ebae-43e7-87b4-f32b14a2ca64")
+	)
+	(junction
 		(at 53.34 156.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b224ad35-5663-4b6a-b2e8-34949548b7b6")
+	)
+	(junction
+		(at 76.2 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c11a05a7-0bad-4440-86e5-2fb6e4d4996e")
+	)
+	(junction
+		(at 76.2 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d9a1325f-ae88-46d9-8219-35b13a75f7d6")
 	)
 	(junction
 		(at 171.45 35.56)
@@ -5079,6 +5238,26 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 30.48) (xy 63.5 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17a90970-3f3a-4a70-8957-ec40fb329c41")
+	)
+	(wire
+		(pts
+			(xy 63.5 25.4) (xy 63.5 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1dcba601-fd39-4c60-bc1f-beb1165a9858")
+	)
+	(wire
+		(pts
 			(xy 118.11 63.5) (xy 138.43 63.5)
 		)
 		(stroke
@@ -5096,16 +5275,6 @@
 			(type default)
 		)
 		(uuid "21730bba-73a1-4f7a-8ae6-dd6489473f6c")
-	)
-	(wire
-		(pts
-			(xy 68.58 41.91) (xy 71.12 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "24ed21ec-5abf-42cd-916d-63b3a4cfba73")
 	)
 	(wire
 		(pts
@@ -5139,6 +5308,16 @@
 	)
 	(wire
 		(pts
+			(xy 76.2 35.56) (xy 59.69 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2d654745-88a0-488f-9333-2f5d5fe59a12")
+	)
+	(wire
+		(pts
 			(xy 228.6 26.67) (xy 229.87 26.67)
 		)
 		(stroke
@@ -5146,16 +5325,6 @@
 			(type default)
 		)
 		(uuid "2dc8ba58-b076-46c3-a87f-543b95fdac97")
-	)
-	(wire
-		(pts
-			(xy 68.58 39.37) (xy 71.12 39.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2de4af69-0533-403a-919c-186aea0d5612")
 	)
 	(wire
 		(pts
@@ -5246,6 +5415,16 @@
 			(type default)
 		)
 		(uuid "3ad929e6-4e3a-4a12-9344-de7af1ce39f7")
+	)
+	(wire
+		(pts
+			(xy 63.5 30.48) (xy 76.2 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b728d65-7f12-4239-9061-a598a4f35482")
 	)
 	(wire
 		(pts
@@ -5379,6 +5558,16 @@
 	)
 	(wire
 		(pts
+			(xy 76.2 60.96) (xy 76.2 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "536c0254-d2a2-42c7-82c2-a4c5811f9a07")
+	)
+	(wire
+		(pts
 			(xy 91.44 151.13) (xy 109.22 151.13)
 		)
 		(stroke
@@ -5469,6 +5658,16 @@
 	)
 	(wire
 		(pts
+			(xy 59.69 35.56) (xy 59.69 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69fcc6b5-1b3a-41e1-b875-923b86de1839")
+	)
+	(wire
+		(pts
 			(xy 271.78 90.17) (xy 267.97 90.17)
 		)
 		(stroke
@@ -5529,33 +5728,13 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 44.45) (xy 71.12 44.45)
+			(xy 76.2 35.56) (xy 76.2 39.37)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "75fd381a-a039-429a-87d1-f09226434905")
-	)
-	(wire
-		(pts
-			(xy 68.58 39.37) (xy 68.58 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "792de5e6-1f63-4c90-bcd8-389b4b4a5360")
-	)
-	(wire
-		(pts
-			(xy 63.5 34.29) (xy 63.5 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "796d8b49-314a-452f-9dbc-6a4fcb37346f")
+		(uuid "815a1204-aefb-4924-b2f3-4557126ac077")
 	)
 	(wire
 		(pts
@@ -5576,6 +5755,16 @@
 			(type default)
 		)
 		(uuid "8958f16f-53d5-4baa-8c38-f98bf3d50a00")
+	)
+	(wire
+		(pts
+			(xy 96.52 57.15) (xy 96.52 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a5e7fd9-c2de-4ee6-84dd-fc3a877319fb")
 	)
 	(wire
 		(pts
@@ -5619,6 +5808,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 52.07) (xy 76.2 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f949290-fc36-4e0e-a801-7ad4277dfdc8")
+	)
+	(wire
+		(pts
 			(xy 271.78 115.57) (xy 267.97 115.57)
 		)
 		(stroke
@@ -5636,6 +5835,16 @@
 			(type default)
 		)
 		(uuid "9076e8da-9495-44bf-8500-eaa7a88f3d03")
+	)
+	(wire
+		(pts
+			(xy 96.52 25.4) (xy 96.52 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90a4bda8-b527-478f-ba09-85457e85be2a")
 	)
 	(wire
 		(pts
@@ -5679,16 +5888,6 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 41.91) (xy 68.58 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "98c0737e-69d3-4e12-a833-531206d010d4")
-	)
-	(wire
-		(pts
 			(xy 271.78 82.55) (xy 267.97 82.55)
 		)
 		(stroke
@@ -5696,6 +5895,16 @@
 			(type default)
 		)
 		(uuid "99232785-8b52-4e6f-8bec-3f70e343ad2b")
+	)
+	(wire
+		(pts
+			(xy 96.52 39.37) (xy 76.2 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9939424e-fd13-41b2-90b7-66d47c1ad230")
 	)
 	(wire
 		(pts
@@ -5716,6 +5925,16 @@
 			(type default)
 		)
 		(uuid "9bbd7b8f-6411-4473-af7f-6bfd437a7b09")
+	)
+	(wire
+		(pts
+			(xy 102.87 52.07) (xy 96.52 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9d6fb8c9-a609-4677-90f2-e1d87d78fa13")
 	)
 	(wire
 		(pts
@@ -5839,6 +6058,16 @@
 	)
 	(wire
 		(pts
+			(xy 102.87 25.4) (xy 102.87 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bcad820b-0159-4333-b20f-d03ece4f5ae9")
+	)
+	(wire
+		(pts
 			(xy 53.34 167.64) (xy 53.34 166.37)
 		)
 		(stroke
@@ -5856,6 +6085,26 @@
 			(type default)
 		)
 		(uuid "bd794fe4-29df-49c5-8077-da47a9650076")
+	)
+	(wire
+		(pts
+			(xy 63.5 57.15) (xy 76.2 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0847bc9-4f5e-4a4a-a5d5-fc2c3fa3c9a0")
+	)
+	(wire
+		(pts
+			(xy 96.52 35.56) (xy 96.52 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c622c94b-7e93-43e9-9163-ced41272fded")
 	)
 	(wire
 		(pts
@@ -5896,6 +6145,16 @@
 			(type default)
 		)
 		(uuid "d2aec89c-5872-4d5a-aca9-2989ed39ea25")
+	)
+	(wire
+		(pts
+			(xy 96.52 60.96) (xy 76.2 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d3f6b089-942c-4ea8-8397-f5fc6ba6fecc")
 	)
 	(wire
 		(pts
@@ -5996,6 +6255,16 @@
 			(type default)
 		)
 		(uuid "ecae7222-7b7c-4239-840d-f5ad3eb37941")
+	)
+	(wire
+		(pts
+			(xy 59.69 57.15) (xy 63.5 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eceb72c8-4865-45fc-9e7b-91b48821636f")
 	)
 	(wire
 		(pts
@@ -7150,7 +7419,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 68.58 48.26 0)
+		(at 63.5 57.15 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7161,7 +7430,7 @@
 		(fields_autoplaced yes)
 		(uuid "20b3678c-05a2-481d-a424-a4592c8a1779")
 		(property "Reference" "#PWR010"
-			(at 68.58 54.61 0)
+			(at 63.5 63.5 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7172,7 +7441,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 68.58 53.34 0)
+			(at 63.5 62.23 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7182,7 +7451,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 68.58 48.26 0)
+			(at 63.5 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7193,7 +7462,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 48.26 0)
+			(at 63.5 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7204,7 +7473,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 68.58 48.26 0)
+			(at 63.5 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7832,7 +8101,7 @@
 	)
 	(symbol
 		(lib_id "power:+BATT")
-		(at 63.5 34.29 0)
+		(at 63.5 25.4 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7843,7 +8112,7 @@
 		(fields_autoplaced yes)
 		(uuid "4f568a4b-9c32-4f78-ae9c-44278cae8631")
 		(property "Reference" "#PWR014"
-			(at 63.5 38.1 0)
+			(at 63.5 29.21 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7854,7 +8123,7 @@
 			)
 		)
 		(property "Value" "+BATT"
-			(at 63.5 29.21 0)
+			(at 63.5 20.32 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7864,7 +8133,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 63.5 34.29 0)
+			(at 63.5 25.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7875,7 +8144,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 63.5 34.29 0)
+			(at 63.5 25.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7886,7 +8155,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+BATT\""
-			(at 63.5 34.29 0)
+			(at 63.5 25.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8394,94 +8663,6 @@
 		)
 	)
 	(symbol
-		(lib_id "QITN_Matek_Micro_BEC:QITN_Matek_Micro_BEC_6-60V_5V9V12V")
-		(at 83.82 39.37 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "69c908f3-8b69-44ba-b3b9-ac617a9fc5b9")
-		(property "Reference" "U4"
-			(at 92.71 38.0999 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "QITN BEC"
-			(at 92.71 40.6399 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "QITN_Matek_Micro_BEC:BEC_QITN_Matek_Micro_18x16mm_Castellated"
-			(at 83.82 52.07 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.mateksys.com/?portfolio=mbec12s"
-			(at 83.82 54.61 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Micro BEC module, 6-60V input, selectable 5V/9V/12V output. Pads: OUT, GND, GND, IN."
-			(at 86.868 49.022 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d33a55fd-f4c0-4543-8a9d-1858061b9991")
-		)
-		(pin "4"
-			(uuid "ba9db3a5-2d47-49ca-894e-b90ea777abd9")
-		)
-		(pin "2"
-			(uuid "b52db0c9-d7a3-4fb0-8eef-61b8aec3bcc0")
-		)
-		(pin "3"
-			(uuid "c942b90b-323d-40af-aaf5-7b25f612e569")
-		)
-		(instances
-			(project "Hot_Wheels_Electronics"
-				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
-					(reference "U4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 77.47 167.64 0)
 		(unit 1)
@@ -8715,6 +8896,114 @@
 			(project "Hot_Wheels_Electronics"
 				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
 					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MiniBuck:MiniBuck_3A")
+		(at 86.36 54.61 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7c1bf545-6279-4384-852e-ebfe34e266d4")
+		(property "Reference" "U4"
+			(at 86.36 41.91 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MiniBuck_3A"
+			(at 86.36 44.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MiniBuck:MiniBuck_CN3903_17.5x12mm"
+			(at 86.36 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 86.36 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Mini fixed-output non-isolated buck converter module; 17.5 x 12 x 4.3 mm; output voltage is selected by purchased module variant"
+			(at 86.36 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "VOUT" "6 V"
+			(at 86.36 46.99 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.016 1.016)
+					(thickness 0.1524)
+				)
+			)
+		)
+		(property "Module Size" "17.5 x 12 x 4.3 mm"
+			(at 86.36 62.23 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "e42a6a01-c81e-445c-a9a4-d7c1a3278fb9")
+		)
+		(pin "1"
+			(uuid "6e608a9e-d215-4977-913a-50d888b29bd4")
+		)
+		(pin "4"
+			(uuid "33ce27fc-f16d-4e69-8de9-4b60e74878f6")
+		)
+		(pin "2"
+			(uuid "d0975330-f18a-493c-9958-88d43ca46c33")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "U4")
 					(unit 1)
 				)
 			)
@@ -9669,6 +9958,84 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+6V")
+		(at 102.87 25.4 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "abb13477-4a78-4cd8-9573-4e8a2e0008f3")
+		(property "Reference" "#PWR028"
+			(at 102.87 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+6V"
+			(at 102.87 20.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 102.87 25.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 102.87 25.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+6V\""
+			(at 102.87 25.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "cbb33fdc-b8d7-45f6-b70d-62d2fa8b9cc1")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR028")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 250.19 163.83 0)
 		(unit 1)
@@ -9911,8 +10278,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 71.12 34.29 0)
+		(lib_id "MiniBuck:MiniBuck_3A")
+		(at 86.36 33.02 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9921,10 +10288,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "bded624f-36f4-46db-a62d-16e0a1a29318")
-		(property "Reference" "#PWR07"
-			(at 71.12 38.1 0)
-			(hide yes)
+		(uuid "c1719a6e-f235-479c-98a3-c459e3c90cc6")
+		(property "Reference" "U5"
+			(at 86.36 20.32 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9933,8 +10299,8 @@
 				)
 			)
 		)
-		(property "Value" "+5V"
-			(at 71.12 29.21 0)
+		(property "Value" "MiniBuck_3A"
+			(at 86.36 22.86 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9943,8 +10309,8 @@
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 71.12 34.29 0)
+		(property "Footprint" "MiniBuck:MiniBuck_CN3903_17.5x12mm"
+			(at 86.36 33.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9955,7 +10321,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 71.12 34.29 0)
+			(at 86.36 33.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9965,8 +10331,8 @@
 				)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 71.12 34.29 0)
+		(property "Description" "Mini fixed-output non-isolated buck converter module; 17.5 x 12 x 4.3 mm; output voltage is selected by purchased module variant"
+			(at 86.36 33.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9975,14 +10341,45 @@
 					(size 1.27 1.27)
 				)
 			)
+		)
+		(property "VOUT" "3.3 V"
+			(at 86.36 25.4 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.016 1.016)
+					(thickness 0.1524)
+				)
+			)
+		)
+		(property "Module Size" "17.5 x 12 x 4.3 mm"
+			(at 86.36 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(pin "4"
+			(uuid "2562d6f6-3496-44d2-9d4b-463842c75722")
+		)
+		(pin "3"
+			(uuid "2ad033db-b051-4815-89d8-dd29adf56149")
+		)
+		(pin "2"
+			(uuid "bc16579c-d358-4e6f-af57-3c14f1631d8c")
 		)
 		(pin "1"
-			(uuid "e429887f-8b46-4154-bdf1-e2c41fb16347")
+			(uuid "11cf25f2-133a-4abc-b399-338d8e65cfc8")
 		)
 		(instances
 			(project "Hot_Wheels_Electronics"
 				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
-					(reference "#PWR07")
+					(reference "U5")
 					(unit 1)
 				)
 			)
@@ -10063,6 +10460,84 @@
 			(project "Hot_Wheels_Electronics"
 				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
 					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 96.52 25.4 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c76a2826-3272-4d7b-bd8d-de22572f2cd1")
+		(property "Reference" "#PWR07"
+			(at 96.52 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 96.52 20.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DFN_QFN:Diodes_UDFN3810-9_TYPE_B"
+			(at 96.52 25.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 25.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 96.52 25.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "830aaed5-5ee2-4c70-bcdb-98ad49e4085a")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -10971,18 +11446,6 @@
 					(unit 1)
 				)
 			)
-		)
-	)
-	(group ""
-		(uuid "095f47f7-0ff1-4551-9450-d3c575d695a3")
-		(members "083f59c6-50f6-4dcb-abe3-86b5732fb4a0" "20b3678c-05a2-481d-a424-a4592c8a1779"
-			"24ed21ec-5abf-42cd-916d-63b3a4cfba73" "2de4af69-0533-403a-919c-186aea0d5612"
-			"4ca657a8-0053-46f4-8ceb-ce87fe14c2bd" "4f568a4b-9c32-4f78-ae9c-44278cae8631"
-			"607feafd-b801-4c23-a377-fdb9cdb69394" "69c908f3-8b69-44ba-b3b9-ac617a9fc5b9"
-			"6f97644c-59c8-4740-977f-a666882a740a" "75fd381a-a039-429a-87d1-f09226434905"
-			"792de5e6-1f63-4c90-bcd8-389b4b4a5360" "796d8b49-314a-452f-9dbc-6a4fcb37346f"
-			"98c0737e-69d3-4e12-a833-531206d010d4" "9959b72b-7bd9-4c0a-8464-865c42ce76d2"
-			"9cc8c270-015d-4a9b-9c8b-38b2c44a0e54" "bded624f-36f4-46db-a62d-16e0a1a29318"
 		)
 	)
 	(group ""
