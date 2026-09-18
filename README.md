@@ -19,7 +19,7 @@ Hot_Wheels_RC/
 
 ## CAD - Onshape
 
-This project uses Onshape for it's CAD (computer-aided design) work. It is publicly available here: <https://cad.onshape.com/documents/5e98e5633ee093c54380ece6/w/86f2519afc7872e03f376baa/e/f928c5beb2e31589149b2275?renderMode=0&uiState=6aad22d581262b4e7262e72c>
+This project uses Onshape for its CAD (computer-aided design) work. It is publicly available here: <https://cad.onshape.com/documents/5e98e5633ee093c54380ece6/w/86f2519afc7872e03f376baa/e/f928c5beb2e31589149b2275?renderMode=0&uiState=6aad22d581262b4e7262e72c>
 
 ## Collaboration Guidelines
 
