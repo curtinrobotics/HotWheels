@@ -14,9 +14,12 @@ Hot_Wheels_RC/
 ├── docs/                       -> Documentation for the project
 ├── hardware_design/            -> CAD and schematic files for the hardware components
 │   ├── Hot_Wheels_3d_model/    -> 3D model exported files (e.g., .stl, .step) for manufacturing and prototyping
-│   └── Hot_Wheels_3d_model.f3d -> Fusion 360 CAD file (requires Fusion 360 to open)
 ├── Hot_Wheels_arduino_firmware/ -> Arduino firmware source code
 ```
+
+## CAD - Onshape
+
+This project uses Onshape for its CAD (computer-aided design) work. It is publicly available here: <https://cad.onshape.com/documents/5e98e5633ee093c54380ece6/w/86f2519afc7872e03f376baa/e/f928c5beb2e31589149b2275?renderMode=0&uiState=6aad22d581262b4e7262e72c>
 
 ## Collaboration Guidelines
 
