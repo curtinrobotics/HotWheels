@@ -143,11 +143,6 @@ jobs:
                 ...(pullRequest.closingIssuesReferences?.nodes || []),
                 ...(pullRequest.manuallyLinked?.nodes || []),
               ]);
-              const manuallyLinkedIssues = new Set(
-                (pullRequest.manuallyLinked?.nodes || [])
-                  .filter((issue) => issue?.repository?.nameWithOwner === `${owner}/${repo}`)
-                  .map((issue) => issue.number),
-              );
               const body = pullRequest.body || '';
               const managedBlock = body.match(managedBlockPattern)?.[0];
               const managedNumbers = new Set(
@@ -240,7 +235,7 @@ jobs:
               const pullRequestEvent = context.eventName === 'pull_request';
               if (pullRequestEvent && context.payload.action === 'closed' && context.payload.pull_request.merged === true) {
                 const issuesToClose = linkedIssues.filter(
-                  (issue) => !manuallyLinkedIssues.has(issue.number) && !managedNumbers.has(issue.number),
+                  (issue) => bodyReferences.has(issue.number) && !managedNumbers.has(issue.number),
                 );
 
                 for (const issue of issuesToClose) {
@@ -254,9 +249,9 @@ jobs:
                 }
 
                 core.info(
-                  `Closed GitHub-authoritative closing reference issue(s): ${issuesToClose
+                  `Closed explicitly referenced issue(s): ${issuesToClose
                     .map((issue) => `#${issue.number}`)
-                    .join(', ') || 'none'}. Manually linked and managed ancestor issue(s) were excluded.`,
+                    .join(', ') || 'none'}. Managed ancestor issue(s) and manual links without closing keywords were excluded.`,
                 );
               }
             }
