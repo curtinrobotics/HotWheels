@@ -235,8 +235,11 @@ jobs:
 
               const mergedPullRequestEvent =
                 context.eventName === 'pull_request' &&
-                context.payload.action === 'closed' &&
-                context.payload.pull_request.merged === true;
+                context.payload.pull_request.merged === true &&
+                (
+                  context.payload.action === 'closed' ||
+                  (context.payload.action === 'edited' && context.payload.changes?.body)
+                );
               const mergedManualReplay =
                 context.eventName === 'workflow_dispatch' &&
                 pullRequest.merged === true;
