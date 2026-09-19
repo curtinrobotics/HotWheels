@@ -103,6 +103,7 @@ jobs:
                     pullRequest(number: $number) {
                       body
                       baseRefName
+                      merged
                       closingIssuesReferences(first: 100) {
                         nodes {
                           number
@@ -232,8 +233,15 @@ jobs:
                 }
               }
 
-              const pullRequestEvent = context.eventName === 'pull_request';
-              if (pullRequestEvent && context.payload.action === 'closed' && context.payload.pull_request.merged === true) {
+              const mergedPullRequestEvent =
+                context.eventName === 'pull_request' &&
+                context.payload.action === 'closed' &&
+                context.payload.pull_request.merged === true;
+              const mergedManualReplay =
+                context.eventName === 'workflow_dispatch' &&
+                pullRequest.merged === true;
+
+              if (mergedPullRequestEvent || mergedManualReplay) {
                 const issuesToClose = linkedIssues.filter(
                   (issue) => bodyReferences.has(issue.number) && !managedNumbers.has(issue.number),
                 );
