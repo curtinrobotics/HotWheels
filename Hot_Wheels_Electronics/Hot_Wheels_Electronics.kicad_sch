@@ -9407,84 +9407,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 62.23 78.74 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "99fb0b4b-4091-4ce1-a384-65eb5d0ffee9")
-		(property "Reference" "#PWR09"
-			(at 62.23 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+5V"
-			(at 62.23 73.66 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 62.23 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 62.23 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 62.23 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "a46bd3ed-e45b-46c3-baca-4644cc5734e9")
-		)
-		(instances
-			(project "Hot_Wheels_Electronics"
-				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
-					(reference "#PWR09")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3V3")
 		(at 170.18 30.48 0)
 		(unit 1)
@@ -11127,6 +11049,84 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+6V")
+		(at 62.23 78.74 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ec425170-406b-4a86-9423-347a09e3c8e1")
+		(property "Reference" "#PWR09"
+			(at 62.23 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+6V"
+			(at 62.23 73.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 62.23 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 62.23 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+6V\""
+			(at 62.23 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1a082932-4cd5-4def-950c-91c3541b52d2")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+BATT")
 		(at 129.54 109.22 0)
 		(unit 1)
@@ -11383,8 +11383,8 @@
 		(uuid "45891a04-f313-4957-81ea-183f40708e03")
 		(members "02e6cbf2-d642-4879-af54-b22362d7b191" "07f69d92-3cd5-4135-9105-22ac4b3c81ec"
 			"17040d0f-3602-4ff4-81a5-da3a45db6dbc" "85777476-fab3-4af8-8309-0fb6b166dc6a"
-			"99fb0b4b-4091-4ce1-a384-65eb5d0ffee9" "9f39db7f-b2ed-4d29-9364-21f243226ff3"
-			"b6706b2a-33e2-43b6-8358-153c1c58b17a" "e8528510-df4f-40b0-b7c8-9f66a5899095"
+			"9f39db7f-b2ed-4d29-9364-21f243226ff3" "b6706b2a-33e2-43b6-8358-153c1c58b17a"
+			"e8528510-df4f-40b0-b7c8-9f66a5899095"
 		)
 	)
 	(group ""
