@@ -2031,7 +2031,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "RF_Module:ESP32-WROOM-32"
+		(symbol "RF_Module:ESP32-WROOM-32UE"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -2048,7 +2048,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "ESP32-WROOM-32"
+			(property "Value" "ESP32-WROOM-32UE"
 				(at 1.27 34.29 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2059,8 +2059,8 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "RF_Module:ESP32-WROOM-32"
-				(at 0 -38.1 0)
+			(property "Footprint" "RF_Module:ESP32-WROOM-32UE"
+				(at 16.51 -34.29 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -2070,18 +2070,7 @@
 					)
 				)
 			)
-			(property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf"
-				(at -7.62 1.27 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "RF Module, ESP32-D0WDQ6 SoC, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 2.7-3.6V, onboard antenna, SMD"
+			(property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2092,7 +2081,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "RF Radio BT ESP ESP32 Espressif onboard PCB antenna"
+			(property "Description" "RF Module, ESP32-D0WD-V3 SoC, without PSRAM, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 2.7-3.6V, external antenna, SMD"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2103,7 +2092,7 @@
 					)
 				)
 			)
-			(property "ki_fp_filters" "ESP32?WROOM?32*"
+			(property "ki_keywords" "RF Radio BT ESP ESP32 Espressif external U.FL antenna"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2114,7 +2103,18 @@
 					)
 				)
 			)
-			(symbol "ESP32-WROOM-32_0_1"
+			(property "ki_fp_filters" "ESP32?WROOM?32UE*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "ESP32-WROOM-32UE_0_1"
 				(rectangle
 					(start -12.7 33.02)
 					(end 12.7 -33.02)
@@ -2127,25 +2127,7 @@
 					)
 				)
 			)
-			(symbol "ESP32-WROOM-32_1_1"
-				(pin power_in line
-					(at 0 -35.56 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+			(symbol "ESP32-WROOM-32UE_1_1"
 				(pin power_in line
 					(at 0 35.56 270)
 					(length 2.54)
@@ -2380,25 +2362,6 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 0 -35.56 90)
-					(length 2.54)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin bidirectional line
 					(at 15.24 12.7 180)
 					(length 2.54)
@@ -2417,10 +2380,11 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at -15.24 -5.08 0)
+				(pin no_connect line
+					(at -12.7 -5.08 0)
 					(length 2.54)
-					(name "SHD/SD2"
+					(hide yes)
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2435,10 +2399,11 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at -15.24 -7.62 0)
+				(pin no_connect line
+					(at -12.7 -7.62 0)
 					(length 2.54)
-					(name "SWP/SD3"
+					(hide yes)
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2453,10 +2418,11 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at -15.24 -12.7 0)
+				(pin no_connect line
+					(at -12.7 -12.7 0)
 					(length 2.54)
-					(name "SCS/CMD"
+					(hide yes)
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2471,10 +2437,11 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at -15.24 -10.16 0)
+				(pin no_connect line
+					(at -12.7 -10.16 0)
 					(length 2.54)
-					(name "SCK/CLK"
+					(hide yes)
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2489,10 +2456,11 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at -15.24 0 0)
+				(pin no_connect line
+					(at -12.7 0 0)
 					(length 2.54)
-					(name "SDO/SD0"
+					(hide yes)
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2507,10 +2475,11 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at -15.24 -2.54 0)
+				(pin no_connect line
+					(at -12.7 -2.54 0)
 					(length 2.54)
-					(name "SDI/SD1"
+					(hide yes)
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2796,10 +2765,9 @@
 						)
 					)
 				)
-				(pin passive line
+				(pin power_in line
 					(at 0 -35.56 90)
 					(length 2.54)
-					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -2807,26 +2775,7 @@
 							)
 						)
 					)
-					(number "38"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -35.56 90)
-					(length 2.54)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "39"
+					(number "[1,15,38,39]"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4862,7 +4811,7 @@
 		)
 		(uuid "050382b0-5c64-4264-80f3-62f3e7b26d29")
 	)
-	(text_box "microcontroller esp32-s"
+	(text_box "microcontroller ESP32-WROOM-32-UE-N8"
 		(exclude_from_sim no)
 		(at 204.47 63.5 0)
 		(size 116.84 130.81)
@@ -5067,44 +5016,20 @@
 		(uuid "ee8caa5c-4f5f-429f-97a3-3779ad344e1b")
 	)
 	(no_connect
-		(at 237.49 110.49)
-		(uuid "0eb29272-2b89-4d43-8da5-a14911234d7c")
-	)
-	(no_connect
 		(at 267.97 85.09)
 		(uuid "48e354d5-f186-41d5-8bd7-a85a4984b4fd")
-	)
-	(no_connect
-		(at 237.49 113.03)
-		(uuid "4e8447f8-9b90-462e-b87e-73c4eca494ba")
 	)
 	(no_connect
 		(at 267.97 102.87)
 		(uuid "615c3754-75f2-45d7-8b21-f819c9a87080")
 	)
 	(no_connect
-		(at 237.49 118.11)
-		(uuid "90b83b83-f858-4d55-98da-ec9a94c6be69")
-	)
-	(no_connect
 		(at 267.97 92.71)
 		(uuid "9e3830a7-5fb8-468d-b1c7-7021433e0248")
 	)
 	(no_connect
-		(at 237.49 120.65)
-		(uuid "a367cf14-d7f7-4fc1-8011-76da92d6cc3a")
-	)
-	(no_connect
-		(at 237.49 115.57)
-		(uuid "c1813da9-4b0c-436a-bf87-c3b7866bcf8b")
-	)
-	(no_connect
 		(at 267.97 95.25)
 		(uuid "db450e6c-0952-4766-b7af-dfedf04ebb63")
-	)
-	(no_connect
-		(at 237.49 123.19)
-		(uuid "f204e736-c58e-4512-8e4e-51ed71681946")
 	)
 	(wire
 		(pts
@@ -6983,7 +6908,7 @@
 		)
 	)
 	(symbol
-		(lib_id "RF_Module:ESP32-WROOM-32")
+		(lib_id "RF_Module:ESP32-WROOM-32UE")
 		(at 252.73 110.49 0)
 		(unit 1)
 		(body_style 1)
@@ -7016,8 +6941,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RF_Module:ESP32-WROOM-32"
-			(at 252.73 148.59 0)
+		(property "Footprint" "RF_Module:ESP32-WROOM-32UE"
+			(at 269.24 144.78 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7027,8 +6952,8 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf"
-			(at 245.11 109.22 0)
+		(property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf"
+			(at 252.73 110.49 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7038,7 +6963,7 @@
 				)
 			)
 		)
-		(property "Description" "RF Module, ESP32-D0WDQ6 SoC, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 2.7-3.6V, onboard antenna, SMD"
+		(property "Description" "RF Module, ESP32-D0WD-V3 SoC, without PSRAM, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 2.7-3.6V, external antenna, SMD"
 			(at 252.73 110.49 0)
 			(hide yes)
 			(show_name no)
@@ -7055,7 +6980,7 @@
 		(pin "34"
 			(uuid "f7878617-0612-4a70-8b5d-df0eea1ab40b")
 		)
-		(pin "39"
+		(pin "[1,15,38,39]"
 			(uuid "51c9d1cf-aeca-4f4c-85b4-362597c9156b")
 		)
 		(pin "37"
@@ -7072,9 +6997,6 @@
 		)
 		(pin "33"
 			(uuid "2d7e6814-eae3-46c1-908c-875ffcb2cc10")
-		)
-		(pin "38"
-			(uuid "1f1e80ea-a3ee-4f36-9b33-dffe7d5017ed")
 		)
 		(pin "27"
 			(uuid "6ea00d4c-e202-452c-8ba1-cb2792b5f1b8")
@@ -7127,9 +7049,6 @@
 		(pin "4"
 			(uuid "595b994c-068d-479b-bbe5-2513b9d88a95")
 		)
-		(pin "15"
-			(uuid "cf8bcf7e-035d-49b7-9405-59238e57d52f")
-		)
 		(pin "16"
 			(uuid "4d9a3f02-ae20-4fe1-a1ff-967a8e064a65")
 		)
@@ -7156,9 +7075,6 @@
 		)
 		(pin "2"
 			(uuid "7006dd52-a42f-449b-bfc8-6eaec79cd339")
-		)
-		(pin "1"
-			(uuid "1927ecd8-581e-4671-9df0-5ca21d5a2e87")
 		)
 		(pin "14"
 			(uuid "b7c5f75f-a031-4f88-a7fb-c35e58c8466d")
