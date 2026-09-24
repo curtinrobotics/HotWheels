@@ -6,8 +6,8 @@
 | ------------------- | -------------------------- |
 | Status              | Draft requirements capture |
 | Target              | 1:43-scale car, PCB Rev A  |
-| Baseline controller | ESP32 D1 Mini with USB-C   |
-| Last updated        | 11 August 2026             |
+| Baseline controller | ESP32-WROOM-32UE-N8       |
+| Last updated        | 24 September 2026          |
 
 ## Purpose
 
@@ -33,7 +33,7 @@ The design should remain modular. The body-mounted lights, forward distance sens
 | Area                       | Decision                                                                         |
 | -------------------------- | -------------------------------------------------------------------------------- |
 | Vehicle scale              | 1:43                                                                             |
-| Main controller            | ESP32 D1 Mini module with USB-C                                                  |
+| Main controller            | ESP32-WROOM-32UE-N8 castellated module with 8 MB flash                               |
 | Battery                    | 2S 600 mAh 20C LiPo, approximately 49 × 18 × 15 mm                               |
 | Brushed motor driver       | DRV8833 dual H-bridge                                                            |
 | Motor-current sensing      | Onboard sensing of both DRV8833 bridge currents                                  |
@@ -53,18 +53,18 @@ The design should remain modular. The body-mounted lights, forward distance sens
 | PCB envelope               | 88 mm long, 44 mm maximum width and 12 mm front/rear arms                        |
 | PCB thickness              | 1.6 mm and 1.8 mm candidates; final choice after stiffness and cost comparison   |
 | Fasteners                  | M2 thin-head screws inserted from underneath                                     |
-| ESP32 mounting             | Removable through standard 2.54 mm double-row SMT socket headers                 |
+| ESP32 mounting             | Direct castellated-module footprint                                                    |
 | Base-station radio         | Direct peer-to-peer control and telemetry without joining the car's access point |
 
-The ESP32 D1 Mini is the Rev A baseline. A bare ESP32 module or an RP2040/RP2350 with Radio Module 2 may be reconsidered later, but those options should not delay the first board.
+The ESP32-WROOM-32UE-N8 is the Rev A baseline. It replaces the earlier D1 Mini and ESP32-S module directions. The N8 variant provides 8 MB of flash for firmware and OTA update headroom, while the external-antenna variant uses an external antenna connection rather than relying on a selectable PCB-antenna/U.FL path.
 
 ## System overview
 
-The 2S battery will feed the main input protection and power switch. Raw battery voltage will supply the DRV8833 and optional external ESC power connection. A dedicated regulator will produce 6 V for the steering servo. A separate logic supply will power the ESP32 D1 Mini and compatible sensors.
+The 2S battery will feed the main input protection and power switch. Raw battery voltage will supply the DRV8833 and optional external ESC power connection. A dedicated regulator will produce 6 V for the steering servo. A dedicated 3.3 V logic supply will power the ESP32-WROOM-32UE-N8 and compatible sensors.
 
 The ESP32 will handle motor and servo control, lighting, audio, sensor acquisition, Bluetooth controller support, ESP-NOW communication and telemetry. Motor-current, battery-voltage and inertial measurements will also support diagnostics, data logging and optional driver-assist functions.
 
-The 6 V servo rail must not be connected directly to the ESP32 module's 5 V input.
+The 6 V servo rail must not be connected directly to the ESP32 module's 3.3 V supply.
 
 ## Main functional requirements
 
@@ -87,7 +87,7 @@ The 6 V servo rail must not be connected directly to the ESP32 module's 5 V inpu
 | ---------------------- | ---------------------------------------------- | -------------------------------------------------------------------- | --------------------------- |
 | Base-station mode      | Direct ESP-NOW or equivalent peer-to-peer link | Bidirectional over the same link                                     | Primary Rev A mode          |
 | Direct-controller mode | Bluetooth Classic through Bluepad32            | Limited, stored locally or provided through a separately tested link | Standalone and fallback use |
-| Development mode       | USB-C programming and serial control tools     | USB-C serial logging                                                 | Bench testing               |
+| Development mode       | External USB-C-to-UART programming adapter          | Serial logging through the same adapter                                | Bench testing               |
 
 ### Radio requirements
 
@@ -121,15 +121,14 @@ A 2S LiPo is nominally 7.4 V and reaches 8.4 V when fully charged. All parts con
 
 ### Planned power rails
 
-| Rail     | Source                                   | Main loads                                 |
-| -------- | ---------------------------------------- | ------------------------------------------ |
-| VBAT     | 2S LiPo                                  | DRV8833 and optional ESC power pads        |
-| 6V_SERVO | Dedicated buck regulator from VBAT       | Steering servo                             |
-| 5V_LOGIC | QITN/Matek BEC or integrated replacement | ESP32 D1 Mini input and compatible modules |
-| 3V3      | ESP32 module or dedicated regulator      | ESP32 logic and compatible sensors         |
-| GND      | Common return                            | All loads                                  |
+| Rail     | Source                          | Main loads                                  |
+| -------- | ------------------------------- | ------------------------------------------- |
+| VBAT     | 2S LiPo                         | DRV8833 and optional ESC power pads         |
+| 6V_SERVO | 6 V MiniBuck module from VBAT   | Steering servo                              |
+| 3V3      | 3.3 V MiniBuck module from VBAT | ESP32-WROOM-32UE-N8 and compatible sensors |
+| GND      | Common return                   | All loads                                   |
 
-The existing QITN/Matek BEC can provide the candidate 5 V logic rail. It does not provide the required 6 V servo rail, so a separate regulator is needed unless the architecture changes.
+The current schematic uses separate fixed-output MiniBuck modules for the 6 V servo rail and 3.3 V logic rail. Any remaining 5 V loads must have an explicitly defined supply before schematic release; a 5 V rail is not assumed simply because some peripherals can use it.
 
 ### Power requirements
 
@@ -141,7 +140,7 @@ The existing QITN/Matek BEC can provide the candidate 5 V logic rail. It does no
 - Firmware must provide configurable low-battery warning and shutdown thresholds.
 - Motor and servo current transients must not reset the ESP32 or corrupt sensor readings.
 - Local ceramic and bulk decoupling must be provided at regulators, the motor driver, the servo connection and the ESP32 supply.
-- USB-C and battery power must not back-power each other through an unsafe path.
+- The external USB-UART programming interface must not back-power the battery or 3.3 V rail through an unsafe path.
 - Reverse-polarity, short-circuit and input transient protection must be reviewed before schematic release.
 - The battery-voltage measurement circuit must tolerate at least 8.4 V plus component tolerances without exceeding the ESP32 ADC input range.
 - Battery telemetry must distinguish sustained low voltage from short motor- or servo-induced voltage sag.
@@ -309,21 +308,15 @@ The buzzer should use a transistor or driver when its current exceeds the safe c
 
 ## ESP32 and GPIO planning
 
-The exact D1 Mini supplier and model must be locked before the footprint is released. Boards sold under this name may differ in dimensions, pin labels, regulator design and USB-to-serial circuitry.
+Rev A uses the ESP32-WROOM-32UE-N8 directly on the PCB. The castellated module removes the D1 Mini carrier board, socket headers and onboard USB connector, reducing both footprint and stack height. The N8 variant is required so the design has 8 MB of flash for firmware growth and OTA update partitions.
 
-The USB-C connector must remain accessible with the body and battery installed. The antenna end needs clearance from the battery, motor, wiring, fasteners and large copper areas.
+The ESP32-WROOM-32UE-N8 uses an external antenna connector. The antenna, coax and connector require a protected mechanical route and clearance from the battery, motor, wiring, fasteners and noisy or grounded structures. The RF layout and antenna placement must follow Espressif's module guidance. An external antenna must be connected before the ESP32 is powered.
 
-### Removable SMT header mounting
+### Programming interface
 
-The D1 Mini will plug into two standard 2×10, 2.54 mm-pitch double-row SMT female socket headers. This produces four rows of ten SMT pads, or 40 pads in total. The module remains removable and must be unplugged before the main PCB is placed on the hotplate for initial assembly or rework.
+USB-to-UART conversion remains off-board. Rev A should expose a compact programming/debug connector carrying the UART signals, ground and any required boot/reset control so a reusable external USB-C-to-UART adapter can program and log the car without dedicating PCB area and height to a USB connector and bridge IC.
 
-The current footprint uses 2.15 × 1.55 mm pad envelopes, header-row X positions of ±11.43 and ±13.97 mm, and end-pin Y positions of ±11.43 mm. Its nominal socket height is 5 mm. These dimensions must be checked against the exact purchased header before PCB release, including contact orientation, body width and lead-free reflow temperature rating. A socket that is not reflow-rated must be fitted after hotplate assembly using a suitable manual soldering process.
-
-With the module centred at the PCB origin and USB-C facing forward, the local footprint represents a 30.48 mm-wide module body extending from Y = −19.05 to +17.78 mm. The USB envelope is 10.16 mm wide and extends to Y = +24.13 mm, leaving approximately 0.92 mm per side inside the 12 mm front arm. The printed front mount and body shell must provide additional clearance for the wider moulded body of a USB cable.
-
-The existing rectangular socket courtyard is 32.5 mm wide and extends from Y = −20.05 to +25.15 mm. Its front corners extend beyond the narrow arm even though the physical module ends and only the narrower USB connector continues forward. Before final PCB DRC, this conservative rectangle should be replaced by a stepped body-and-USB mechanical courtyard based on measured parts.
-
-Components below the removable module should be limited to approximately 3 mm in height. The minimum vertical stack before allowing for module components, pin protrusion, insulation or a battery tray is approximately 23.2 mm with a 1.6 mm chassis PCB, or 23.4 mm with a 1.8 mm chassis PCB, when the 15 mm battery is stacked directly above the socketed module.
+The external programmer must not feed an unsafe voltage into the 3.3 V rail or back-power the battery path. Boot and enable circuitry must leave the module in a valid reset state when no programmer is attached.
 
 ### Current firmware allocation
 
@@ -333,8 +326,8 @@ Components below the removable module should be limited to approximately 3 mm in
 |                        GPIO25 | Forward motor PWM     | ADC2; unsuitable for analog sensing while Wi-Fi is active |
 |                        GPIO33 | Reverse motor PWM     | ADC1-capable but currently used as an output              |
 |                        GPIO12 | Motor-driver enable   | ESP32 strapping pin; reset-state bias must be reviewed    |
-|                        GPIO21 | I2C SDA candidate     | Confirm on the exact D1 Mini                              |
-|                        GPIO22 | I2C SCL candidate     | Confirm on the exact D1 Mini                              |
+|                        GPIO21 | I2C SDA candidate     | Native ESP32 I2C-capable GPIO                           |
+|                        GPIO22 | I2C SCL candidate     | Native ESP32 I2C-capable GPIO                           |
 | Exposed GPIO34, 35, 36 and 39 | ADC1 input candidates | Input-only and without internal pull resistors            |
 
 Battery voltage, thermistor, analog Hall and any directly digitised motor-current measurements must use ADC1 because ADC2 is unavailable while the ESP32 Wi-Fi driver is active.
@@ -411,7 +404,7 @@ All Rev A chassis holes are Ø2.3 mm non-plated holes for M2 fasteners. Hole coo
 | Rear arm              |         ±3 mm | −26 and −38 mm |        4 |
 | Main electronics area |        ±19 mm |         ±10 mm |        4 |
 
-The pattern contains 12 holes in total. A nominal Ø4 mm fastener envelope is reserved around each hole. The main and arm holes retain 1.85 mm of PCB material from the drill edge to the nearest side edge, and the nominal fastener envelope leaves 1.0 mm of side clearance. The main-hole envelope remains approximately 0.75 mm outside the current 32.5 mm-wide ESP32 socket courtyard. Thin-head screws enter from underneath. Standard M2 washers are unlikely to fit on the 12 mm-wide arms; actual screw heads, hex nuts and washers must be measured before the printed interfaces are finalised.
+The pattern contains 12 holes in total. A nominal Ø4 mm fastener envelope is reserved around each hole. The main and arm holes retain 1.85 mm of PCB material from the drill edge to the nearest side edge, and the nominal fastener envelope leaves 1.0 mm of side clearance. The ESP32 module, antenna connector and coax route must remain clear of the mounting hardware. Thin-head screws enter from underneath. Standard M2 washers are unlikely to fit on the 12 mm-wide arms; actual screw heads, hex nuts and washers must be measured before the printed interfaces are finalised.
 
 ### Steering envelope
 
@@ -445,8 +438,7 @@ The exact choice between 1.6 mm and 1.8 mm remains open until a fabrication quot
 - The board must support one-pass hotplate assembly.
 - Large modules and connectors need measured footprints, courtyards and height checks.
 - The ESP32 antenna keep-out must be maintained even though the PCB is structural.
-- The D1 Mini, battery and cable-mounted modules must be removed before hotplate assembly or rework.
-- SMT socket bodies must be rated for the selected solder-paste reflow profile or be installed after hotplate reflow.
+- The battery and cable-mounted modules must be removed before hotplate assembly or rework.
 
 ## Telemetry and event data
 
@@ -488,7 +480,7 @@ The design must define and test its response to:
 - invalid, stale or uncalibrated IMU readings while a driver assist is enabled;
 - erroneous drift detection or counter-steer intervention;
 - false, partial, duplicate and missed colour markers;
-- USB-C and battery power being connected together;
+- the external USB-UART programmer and battery being connected together;
 - a connector being inserted into the wrong socket;
 - PCB flex, impact and loose fasteners.
 
@@ -498,7 +490,7 @@ Propulsion must fail safe to stopped. Lighting, audio, telemetry and sensor faul
 
 ### Electrical bring-up
 
-1. Inspect polarity, footprints, solder joints, connector orientation, configuration links and the antenna keep-out.
+1. Inspect polarity, footprints, solder joints, connector orientation and configuration links, and confirm that the external antenna is connected before powering the ESP32.
 2. Check resistance between all power rails and ground before power-up.
 3. Power the board from a current-limited supply without the ESP32, servo, motor or sensors connected.
 4. Verify every regulator across the expected battery range and representative load.
@@ -528,7 +520,7 @@ Propulsion must fail safe to stopped. Lighting, audio, telemetry and sensor faul
 
 ### Mechanical testing
 
-1. Fit-check the battery, body, motor, servo, wiring, USB cable and sensors.
+1. Fit-check the battery, body, motor, servo, wiring, programming cable and sensors.
 2. Measure ground clearance below the screw heads.
 3. Test PCB flex with the car supported at the front and rear mounts.
 4. Inspect the narrow extension transitions and mounting holes after impacts.
@@ -538,11 +530,11 @@ Propulsion must fail safe to stopped. Lighting, audio, telemetry and sensor faul
 
 The design can continue without answering these immediately, but they are needed before the schematic and PCB are frozen:
 
-1. Exact ESP32 D1 Mini and 2.54 mm SMT socket suppliers, dimensions, height, pinout, reflow rating and onboard power circuit.
+1. ~Exact ESP32-WROOM-32UE-N8 supplier, footprint dimensions, antenna connector clearance and programming-header arrangement.~
 2. Drive motor model, quantity, voltage, no-load current, loaded current and stall current.
 3. Steering servo model, operating range, running current and stall current at 6 V.
 4. Battery connector, wire gauge, cable exit and any built-in protection.
-5. Body-shell internal width and height, USB cable access, and fit of the printed front, rear and sensor brackets around the defined PCB envelope.
+5. Body-shell internal width and height, programming-cable access, and fit of the printed front, rear and sensor brackets around the defined PCB envelope.
 6. Default brushed configuration: one parallel-bridge motor or two independent motors.
 7. Exact TOF400C and AS7341 boards, including voltage range, pinout and onboard pull-ups.
 8. Number and placement of WS2812 LEDs.
