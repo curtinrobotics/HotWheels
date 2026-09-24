@@ -5207,6 +5207,10 @@
 		(uuid "9e3830a7-5fb8-468d-b1c7-7021433e0248")
 	)
 	(no_connect
+		(at 267.97 90.17)
+		(uuid "a979fa09-aa11-47fd-82a8-e7071ab93f27")
+	)
+	(no_connect
 		(at 267.97 135.89)
 		(uuid "b9c5bdc6-2e3b-48c7-be8e-6b9e16f63a16")
 	)
@@ -5787,16 +5791,6 @@
 			(type default)
 		)
 		(uuid "69fcc6b5-1b3a-41e1-b875-923b86de1839")
-	)
-	(wire
-		(pts
-			(xy 271.78 90.17) (xy 267.97 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6a3bfa59-c386-4666-a3d7-6972618ce7ff")
 	)
 	(wire
 		(pts
@@ -6907,16 +6901,6 @@
 			(justify left bottom)
 		)
 		(uuid "aa964706-6a3b-457c-ac8f-6d28fc7be7d1")
-	)
-	(label "drv_nfault"
-		(at 271.78 90.17 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ad8aab22-11d4-49b8-a065-8c789d672087")
 	)
 	(label "battery_voltage_sense"
 		(at 214.63 85.09 0)
