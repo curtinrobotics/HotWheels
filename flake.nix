@@ -107,6 +107,7 @@
               configFile = "${(pkgs.formats.toml { }).generate "typos.toml" {
                 default.extend-words = {
                   THT = "THT";
+                  UE = "UE";
                 };
                 default.extend-identifiers = {
                   DuPont = "DuPont";
