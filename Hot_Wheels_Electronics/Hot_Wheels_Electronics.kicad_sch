@@ -4934,7 +4934,7 @@
 	)
 	(text_box "servo"
 		(exclude_from_sim no)
-		(at 44.45 68.58 0)
+		(at 21.59 68.58 0)
 		(size 36.83 27.94)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
@@ -5274,7 +5274,7 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 81.28) (xy 64.77 81.28)
+			(xy 34.29 81.28) (xy 41.91 81.28)
 		)
 		(stroke
 			(width 0)
@@ -6224,7 +6224,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 78.74) (xy 62.23 83.82)
+			(xy 39.37 78.74) (xy 39.37 83.82)
 		)
 		(stroke
 			(width 0)
@@ -6434,7 +6434,7 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 83.82) (xy 62.23 83.82)
+			(xy 34.29 83.82) (xy 39.37 83.82)
 		)
 		(stroke
 			(width 0)
@@ -6853,7 +6853,7 @@
 		(uuid "97654bf6-c377-472f-92a8-838e6ae56167")
 	)
 	(label "servo_signal"
-		(at 64.77 81.28 0)
+		(at 41.91 81.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7162,7 +7162,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 57.15 86.36 0)
+		(at 34.29 86.36 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7173,7 +7173,7 @@
 		(fields_autoplaced yes)
 		(uuid "02e6cbf2-d642-4879-af54-b22362d7b191")
 		(property "Reference" "#PWR05"
-			(at 57.15 92.71 0)
+			(at 34.29 92.71 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7184,7 +7184,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 57.15 91.44 0)
+			(at 34.29 91.44 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7194,7 +7194,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 57.15 86.36 0)
+			(at 34.29 86.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7205,7 +7205,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 57.15 86.36 0)
+			(at 34.29 86.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7216,7 +7216,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 57.15 86.36 0)
+			(at 34.29 86.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10000,7 +10000,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x03_Pin")
-		(at 52.07 83.82 0)
+		(at 29.21 83.82 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10011,7 +10011,7 @@
 		(fields_autoplaced yes)
 		(uuid "85777476-fab3-4af8-8309-0fb6b166dc6a")
 		(property "Reference" "S1"
-			(at 52.705 76.2 0)
+			(at 29.845 76.2 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10021,7 +10021,7 @@
 			)
 		)
 		(property "Value" "servo_output"
-			(at 52.705 78.74 0)
+			(at 29.845 78.74 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10031,7 +10031,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical_SMD_Pin1Left"
-			(at 52.07 83.82 0)
+			(at 29.21 83.82 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10042,7 +10042,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 52.07 83.82 0)
+			(at 29.21 83.82 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10053,7 +10053,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated"
-			(at 52.07 83.82 0)
+			(at 29.21 83.82 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11968,7 +11968,7 @@
 	)
 	(symbol
 		(lib_id "power:+6V")
-		(at 62.23 78.74 0)
+		(at 39.37 78.74 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11979,7 +11979,7 @@
 		(fields_autoplaced yes)
 		(uuid "ec425170-406b-4a86-9423-347a09e3c8e1")
 		(property "Reference" "#PWR09"
-			(at 62.23 82.55 0)
+			(at 39.37 82.55 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11990,7 +11990,7 @@
 			)
 		)
 		(property "Value" "+6V"
-			(at 62.23 73.66 0)
+			(at 39.37 73.66 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -12000,7 +12000,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 62.23 78.74 0)
+			(at 39.37 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12011,7 +12011,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 62.23 78.74 0)
+			(at 39.37 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12022,7 +12022,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+6V\""
-			(at 62.23 78.74 0)
+			(at 39.37 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12289,6 +12289,10 @@
 			"9f39db7f-b2ed-4d29-9364-21f243226ff3" "b6706b2a-33e2-43b6-8358-153c1c58b17a"
 			"e8528510-df4f-40b0-b7c8-9f66a5899095"
 		)
+	)
+	(group ""
+		(uuid "79621570-c022-45aa-ab51-7ac520883926")
+		(members "45891a04-f313-4957-81ea-183f40708e03" "ec425170-406b-4a86-9423-347a09e3c8e1")
 	)
 	(group ""
 		(uuid "b684ae40-99a7-49bd-b573-aa7877b1f7d1")
