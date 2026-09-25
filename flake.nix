@@ -76,7 +76,10 @@
           inherit system overlays;
         };
 
-        globalExcludes = [ ".direnv/**" ];
+        globalExcludes = [
+          ".direnv/**"
+          "Hot_Wheels_Electronics/libraries/**"
+        ];
 
         markdownOptions = [
           "--disable"
@@ -101,6 +104,15 @@
             typos = {
               enable = true;
               includes = [ "*.md" ];
+              configFile = "${(pkgs.formats.toml { }).generate "typos.toml" {
+                default.extend-words = {
+                  THT = "THT";
+                  UE = "UE";
+                };
+                default.extend-identifiers = {
+                  DuPont = "DuPont";
+                };
+              }}";
             };
             shellcheck = {
               enable = true;

@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "MiniBuck")(type "KiCad")(uri "${KIPRJMOD}/MiniBuck.pretty")(options "")(descr "Mini buck converter module footprints"))
+)
