@@ -142,10 +142,10 @@ The current schematic uses separate fixed-output MiniBuck modules for the 6 V se
 - Local ceramic and bulk decoupling must be provided at regulators, the motor driver, the servo connection and the ESP32 supply.
 - The external USB-UART programming interface must not back-power the battery or 3.3 V rail through an unsafe path.
 - Reverse-polarity, short-circuit and input transient protection must be reviewed before schematic release.
-
-Rev A presently omits an inline fuse, MOSFET reverse-polarity protection and input TVS. This does not protect the PCB against reversed battery insertion or a hard short. Battery connector polarity must be checked before power-up; the supply path and wiring require review again after measuring motor and servo current. See the [schematic review](reva_schematic_review.md) for remaining acceptance gates.
 - The battery-voltage measurement circuit must tolerate at least 8.4 V plus component tolerances without exceeding the ESP32 ADC input range.
 - Battery telemetry must distinguish sustained low voltage from short motor- or servo-induced voltage sag.
+
+Rev A presently omits an inline fuse, MOSFET reverse-polarity protection and input TVS. This does not protect the PCB against reversed battery insertion or a hard short. Battery connector polarity must be checked before power-up; the supply path and wiring require review again after measuring motor and servo current. See the [schematic review](reva_schematic_review.md) for remaining acceptance gates.
 
 The battery's 20C label implies an advertised current capability of 12 A. It does not mean the PCB needs to carry 12 A, but it means the battery may deliver destructive current into a fault. Actual motor and servo currents must be measured.
 
