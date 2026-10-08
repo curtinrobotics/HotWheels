@@ -5775,6 +5775,26 @@
 		)
 		(uuid "0b8b869f-6fe0-4d39-8453-9cc1131d0af1")
 	)
+	(text_box "ESC output"
+		(exclude_from_sim no)
+		(at 25.4 247.65 0)
+		(size 41.91 20.32)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "13a5c097-c5b0-4a1c-b233-7bf1c338f96f")
+	)
 	(text_box "servo"
 		(exclude_from_sim no)
 		(at 25.4 111.76 0)
@@ -6122,10 +6142,6 @@
 		(uuid "5dd7d4d2-2d56-485a-9d9a-e6a635d42006")
 	)
 	(no_connect
-		(at 267.97 102.87)
-		(uuid "615c3754-75f2-45d7-8b21-f819c9a87080")
-	)
-	(no_connect
 		(at 267.97 135.89)
 		(uuid "6789048a-b6bc-4d00-9b48-c3a06a638d20")
 	)
@@ -6200,6 +6216,16 @@
 			(type default)
 		)
 		(uuid "04fbb0d6-1b3a-4647-927d-a20efaad8221")
+	)
+	(wire
+		(pts
+			(xy 267.97 102.87) (xy 271.78 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "05964b31-2df7-4be2-a816-673076ee7578")
 	)
 	(wire
 		(pts
@@ -8091,6 +8117,16 @@
 		)
 		(uuid "6dcf0cce-b842-437c-9cdf-38a8e7fe4d4d")
 	)
+	(label "esc_signal"
+		(at 271.78 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6f104cc6-3f35-45a2-8243-1d8879cffc2c")
+	)
 	(label "i2c_sda"
 		(at 158.75 43.18 0)
 		(effects
@@ -8320,6 +8356,16 @@
 			(justify left bottom)
 		)
 		(uuid "c8788d88-2506-491d-af6f-e0cae2c94524")
+	)
+	(label "esc_signal"
+		(at 39.37 255.27 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cd6089f3-a7ae-42bd-9338-69cd3409e9a4")
 	)
 	(label "tof_xshut"
 		(at 271.78 92.71 0)
@@ -9783,6 +9829,84 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 39.37 257.81 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2d06d671-f1fb-4f6b-a585-8ddd0b6227c0")
+		(property "Reference" "#PWR041"
+			(at 39.37 264.16 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 39.37 262.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 39.37 257.81 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 257.81 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 39.37 257.81 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "44ead70d-80fa-4fc8-a6bb-74dfd186db6b")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR041")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 393.7 189.23 0)
 		(unit 1)
 		(body_style 1)
@@ -10256,6 +10380,88 @@
 			(project "Hot_Wheels_Electronics"
 				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
 					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x02_Socket")
+		(at 44.45 255.27 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3e731b21-44dc-4648-9aca-b1507ab0f056")
+		(property "Reference" "J8"
+			(at 45.72 255.2699 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Conn_01x02_Socket"
+			(at 45.72 257.8099 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_ZH_B2B-ZR-SM4-TF_1x02-1MP_P1.50mm_Vertical"
+			(at 44.45 255.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 44.45 255.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 44.45 255.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "87282964-a159-4e3b-8fba-6d6cb7a5065b")
+		)
+		(pin "1"
+			(uuid "b67a6c91-ce2a-49e5-aeed-ac19e0ebcd28")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "J8")
 					(unit 1)
 				)
 			)
@@ -15269,6 +15475,12 @@
 	(group ""
 		(uuid "79621570-c022-45aa-ab51-7ac520883926")
 		(members "45891a04-f313-4957-81ea-183f40708e03" "ec425170-406b-4a86-9423-347a09e3c8e1")
+	)
+	(group ""
+		(uuid "8789d5d3-0fcd-408e-beb1-a14c2e3f77d3")
+		(members "13a5c097-c5b0-4a1c-b233-7bf1c338f96f" "2d06d671-f1fb-4f6b-a585-8ddd0b6227c0"
+			"3e731b21-44dc-4648-9aca-b1507ab0f056" "cd6089f3-a7ae-42bd-9338-69cd3409e9a4"
+		)
 	)
 	(group ""
 		(uuid "ababaa69-b4b4-4dc7-8f57-6cbf1acabcf4")
