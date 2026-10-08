@@ -216,7 +216,7 @@ In this table, “Onboard” means mounted directly on the PCB.
 | Motor temperature                 | MF52B 10 kΩ, B3750 NTC                                   | Resistive divider to ADC1                           | Attached to the motor                    |
 | Motor current                     | DRV8833 bridge sense resistors and measurement circuitry | Analog or dedicated current IC                      | Onboard                                  |
 | Forward distance                  | TOF400C with VL53L1X                                     | I2C                                                 | Forward-facing cable-mounted module      |
-| Floor colour                      | AS7341 V2                                                | I2C (main sensor) + analog (LED brightness control) | Downward-facing cable-mounted module     |
+| Floor colour                      | AS7341 V2                                                | I2C (sensor + onboard LED control)                   | Downward-facing cable-mounted module     |
 | Battery voltage                   | Onboard divider                                          | Analog                                              | Onboard                                  |
 | Acceleration and angular velocity | BMI160 six-axis IMU                                      | I2C or SPI, with data-ready interrupt preferred     | Top side of the main PCB near its centre |
 
