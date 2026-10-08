@@ -288,11 +288,13 @@ The design should use one intentional set of bus pull-ups or configurable pull-u
 
 | Function   | Device         | Interface                 | Mounting                     |
 | ---------- | -------------- | ------------------------- | ---------------------------- |
-| Underglow  | WS2812B        | Digital                   | Top side of the main PCB     |
+| Underglow  | WS2812B-2020-V6 (2 LEDs) | Digital (GPIO2, 3.3 V) | Top side of the main PCB     |
 | Headlights | White THT LEDs | Digital (transistor, PWM) | Removable body shell harness |
 | Taillights | Red THT LEDs   | Digital (transistor, PWM) | Removable body shell harness |
 
 The underglow will use normal top-mounted WS2812-family LEDs. A reflective surface or simple 3D-printed light guide will redirect some light toward the ground. Uniform illumination is not required for Rev A.
+
+The two 2020-size WS2812B-V6 pixels are powered directly from 3.3 V. The selected V6 variant must be purchased, not substituted with older 3.5 V-minimum versions. Worldsemi documents an integrated bypass capacitor on the 2020 version, so no separate per-pixel capacitors are placed. GPIO2 is a boot-strapping pin and the final assembly must verify that the data input does not force a high level during reset. The number and placement of pixels can be revised after optical and power-budget testing. See [Worldsemi WS2812B-2020-V6](https://www.world-semi.com/products/ws2812b-2020-v6.html).
 
 The WS2812 power supply, data-line conditioning and bypass capacitors must follow the exact LED variant's requirements. If a 3.3 V ESP32 signal does not reliably meet the input-high requirement of LEDs powered from 5 V, a logic-level buffer should be included.
 
