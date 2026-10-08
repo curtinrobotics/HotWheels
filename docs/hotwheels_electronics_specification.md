@@ -276,7 +276,7 @@ The first intended driver-assist experiment is bounded automatic counter-steer d
 
 ### Shared I2C bus
 
-The VL53L1X, AS7341 and BMI160 may share one I2C bus after the exact breakout-board supply voltages, level shifting, addresses and onboard pull-ups are verified. SPI remains an option for the BMI160 if I2C bus loading or latency is unsuitable for the driver-assist sample rate.
+The BMI160 now uses the existing 3.3 V I2C bus with address 0x68 (CSB tied high, SDO tied low), preserving its INT1 connection on GPIO16. This frees output-capable GPIOs for lighting and audio without adding an I/O expander. The VL53L1X, AS7341, ADS1115 and BMI160 share SDA/GPIO21 and SCL/GPIO22. Check actual breakout-board voltage tolerances, addresses, bus capacitance and onboard pull-ups before power-up; the main PCB has one 4.7 kΩ pair.
 
 If their connectors are physically compatible, they must use the same safe power, ground, SDA and SCL ordering. Swapping two I2C modules should not damage either one.
 
@@ -298,15 +298,13 @@ The two 2020-size WS2812B-V6 pixels are powered directly from 3.3 V. The selecte
 
 The WS2812 power supply, data-line conditioning and bypass capacitors must follow the exact LED variant's requirements. If a 3.3 V ESP32 signal does not reliably meet the input-high requirement of LEDs powered from 5 V, a logic-level buffer should be included.
 
-The headlights and taillights will be attached to the removable body shell and connect to the PCB through a keyed harness. Their brightness must be independently controllable. Each parallel LED branch needs suitable current limiting.
+The body shell uses a keyed 5-pin JST ZH harness: 1 = +6 V, 2 = left headlight cathode, 3 = right headlight cathode, 4 = left taillight cathode, 5 = right taillight cathode. The LED anodes share +6 V. Each cathode returns through its own 470 Ω SMT resistor to one of two AO3400A low-side PWM switches (GPIO17 headlights, GPIO18 taillights). Each gate has a 100 kΩ pulldown to GND to hold the body lights off at reset. These resistors suit a provisional single white LED on each side of the front and a single red LED on each side of the rear; actual LED forward voltage, brightness and resistor power must be measured and the resistor values revised as necessary.
 
 Lighting power and switching noise must not disturb the colour sensor, radio or ESP32 supply.
 
 ### Buzzer
 
-The PCB will include a buzzer for event sounds, warnings and find-me operation. A passive buzzer is preferred if different tones are required.
-
-The buzzer should use a transistor or driver when its current exceeds the safe capability of an ESP32 GPIO. Sound playback must not block motor control or packet handling.
+Rev A uses a Same Sky (CUI Devices) CPT-9019S-SMT-TR passive 4 kHz SMD piezo, connected between GPIO19 and GND. Its specified current is 5 mA at 3 Vp-p, 4 kHz, so it is driven directly from the GPIO with no transistor. Validate the 3.3 V output waveform and pin loading during prototype bring-up. Sound playback must be nonblocking and must not interfere with motor failsafe handling.
 
 ## ESP32 and GPIO planning
 
@@ -320,25 +318,33 @@ USB-to-UART conversion remains off-board. Rev A should expose a compact programm
 
 The external programmer must not feed an unsafe voltage into the 3.3 V rail or back-power the battery path. Boot and enable circuitry must leave the module in a valid reset state when no programmer is attached.
 
-### Current firmware allocation
+### Rev A schematic GPIO allocation
 
-|                   Native GPIO | Current use           | Design note                                               |
-| ----------------------------: | --------------------- | --------------------------------------------------------- |
-|                        GPIO32 | Steering PWM          | ADC1-capable but currently used as an output              |
-|                        GPIO25 | Forward motor PWM     | ADC2; unsuitable for analog sensing while Wi-Fi is active |
-|                        GPIO33 | Reverse motor PWM     | ADC1-capable but currently used as an output              |
-|                        GPIO12 | Motor-driver enable   | ESP32 strapping pin; reset-state bias must be reviewed    |
-|                        GPIO21 | I2C SDA candidate     | Native ESP32 I2C-capable GPIO                           |
-|                        GPIO22 | I2C SCL candidate     | Native ESP32 I2C-capable GPIO                           |
-| Exposed GPIO34, 35, 36 and 39 | ADC1 input candidates | Input-only and without internal pull resistors            |
+| GPIO | Function | Notes |
+| ---: | --- | --- |
+| 0 | Programming BOOT | Keep boot/reset interface accessible |
+| 1 / 3 | UART TX / RX | Off-board USB-UART programmer |
+| 2 | WS2812B-2020-V6 data | Strapping pin: verify boot-time DIN loading |
+| 4 / 5 | VL53L1X INT / XSHUT | Internal pull-up for interrupt; output-capable shutdown |
+| 13 | DRV8833 nSLEEP | Hardware-defined safe startup state |
+| 14 / 25 / 26 / 27 | DRV8833 bridge inputs | Four outputs support two bridges |
+| 15 | Optional brushless ESC PWM | Strapping pin: verify ESC input at reset |
+| 16 | BMI160 INT1 | Keep available for sensor event interrupt |
+| 17 / 18 | Headlight / taillight PWM | Two AO3400A low-side driver gates |
+| 19 | Passive piezo drive | Direct 3.3 V, current verified against piezo datasheet |
+| 21 / 22 | I2C SDA / SCL | BMI160, ADS1115, VL53L1X, AS7341 |
+| 23 | Spare | Unused output-capable GPIO |
+| 32 | Analog Hall wheel-speed sensor | ADC1 |
+| 33 | Steering servo PWM | 6 V servo supply is separate |
+| 34 / 35 | Spare input-only | No internal pull-ups |
+| 36 / 39 | Battery voltage / motor thermistor | ADC1 |
+| 12 | Spare, strapping | Leave unconnected until reset-state constraints are checked |
 
-Battery voltage, thermistor, analog Hall and any directly digitised motor-current measurements must use ADC1 because ADC2 is unavailable while the ESP32 Wi-Fi driver is active.
+The ADS1115 samples both motor-current sense channels without consuming ESP32 ADC pins. The battery divider, thermistor and Hall sensor remain on ADC1 so sensing can operate while Wi-Fi is active.
 
-Battery voltage, motor temperature, wheel speed and two bridge-current signals require five analog channels. The currently identified free ADC1 inputs provide only four channels, so the final pin plan must add a suitable external converter or digital current monitor, multiplex a non-critical signal, or reassign GPIO. Driver-assist operation must not depend on ADC2 becoming available while the radio is active.
+The BMI160 I2C allocation replaces an earlier SPI allocation. I2C timing and shared-bus behavior with the other sensors require firmware validation under combined operation. No I/O expander is included.
 
-Two independently controlled brushed motors require four DRV8833 input signals. The final pin plan must reserve two additional outputs or treat independent dual-motor control as a later assembly variant.
-
-Boot-strapping pins must not be connected to circuits that can force an invalid boot state.
+Boot-strapping pins must not be connected to circuits that force an invalid boot state. Sensor and lighting input states need checking during reset and programming.
 
 ## Connectors
 
@@ -539,11 +545,11 @@ The design can continue without answering these immediately, but they are needed
 5. Body-shell internal width and height, programming-cable access, and fit of the printed front, rear and sensor brackets around the defined PCB envelope.
 6. Default brushed configuration: one parallel-bridge motor or two independent motors.
 7. Exact TOF400C and AS7341 boards, including voltage range, pinout and onboard pull-ups.
-8. Number and placement of WS2812 LEDs.
-9. Headlight and taillight part numbers, current and wiring arrangement.
+8. Confirm the planned two-pixel WS2812B-2020-V6 placement and adequacy of illumination.
+9. Exact white/red body LED parts, luminous output, resistor power and the body-light harness fit.
 10. Final choice between 1.6 mm and 1.8 mm PCB thickness, plus copper weight and manufacturing tolerances.
 11. Motor-current measurement topology, amplifier or converter, full-scale range, shunt values and calibration method.
-12. BMI160 interface, interrupt allocation, exact placement and whether a newer IMU should be footprint-compatible as a procurement fallback.
+12. BMI160 shared-I2C timing/interrupt validation, final placement and any footprint-compatible procurement fallback.
 
 ## References
 
