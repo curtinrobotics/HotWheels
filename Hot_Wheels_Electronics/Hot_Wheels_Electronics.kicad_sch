@@ -8991,7 +8991,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical_SMD_Pin1Left"
 			(at 44.45 35.56 0)
 			(hide yes)
 			(show_name no)
