@@ -73,7 +73,13 @@
       system:
       let
         pkgs = (import nixpkgs) {
-          inherit system overlays;
+          inherit system;
+          overlays = overlays ++ [
+            (_final: prev: {
+              # Arduino CLI prepends its Python to PATH; ESP32's Linux recipes need that interpreter to include pyserial.
+              arduino-cli = prev.arduino-cli.override { inherit python3; };
+            })
+          ];
         };
 
         globalExcludes = [ ".direnv/**" ];
