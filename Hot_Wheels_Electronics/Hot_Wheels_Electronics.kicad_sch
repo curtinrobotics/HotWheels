@@ -7205,7 +7205,7 @@
 		(uuid "2f420e5d-780b-446a-90e0-f2b9ba09f36a")
 	)
 	(no_connect
-		(at 539.75 111.76)
+		(at 552.45 111.76)
 		(uuid "3074cb05-b4f7-4976-a422-44aa4f439d76")
 	)
 	(no_connect
@@ -7308,7 +7308,7 @@
 	)
 	(wire
 		(pts
-			(xy 459.74 111.76) (xy 524.51 111.76)
+			(xy 459.74 111.76) (xy 476.25 111.76)
 		)
 		(stroke
 			(width 0)
@@ -8038,6 +8038,16 @@
 	)
 	(wire
 		(pts
+			(xy 520.7 111.76) (xy 537.21 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7541edbc-8109-47e9-9a94-642a6e50870b")
+	)
+	(wire
+		(pts
 			(xy 462.28 229.87) (xy 462.28 219.71)
 		)
 		(stroke
@@ -8068,7 +8078,7 @@
 	)
 	(wire
 		(pts
-			(xy 444.5 111.76) (xy 434.34 111.76)
+			(xy 444.5 111.76) (xy 414.02 111.76)
 		)
 		(stroke
 			(width 0)
@@ -8638,6 +8648,26 @@
 	)
 	(wire
 		(pts
+			(xy 491.49 111.76) (xy 505.46 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d21134b5-89aa-4642-a57b-b5a5102a0f95")
+	)
+	(wire
+		(pts
+			(xy 271.78 85.09) (xy 267.97 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d2a90b6d-0645-41e5-a7f8-4a0eba8ffd88")
+	)
+	(wire
+		(pts
 			(xy 120.65 62.23) (xy 100.33 62.23)
 		)
 		(stroke
@@ -9197,7 +9227,7 @@
 		(uuid "5c6463a3-e477-4297-a8ba-b6ccd9ca8274")
 	)
 	(label "underglow_data"
-		(at 267.97 85.09 0)
+		(at 271.78 85.09 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9257,7 +9287,7 @@
 		(uuid "66b89e25-7dd1-46bc-83d8-4c3c2008aa1a")
 	)
 	(label "underglow_data"
-		(at 434.34 111.76 0)
+		(at 414.02 111.76 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9776,7 +9806,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 532.13 111.76 0)
+		(at 544.83 111.76 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9784,10 +9814,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "00559be7-1609-41eb-81d3-034a34992a46")
 		(property "Reference" "D2"
-			(at 542.29 97.79 0)
+			(at 549.148 101.854 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9798,7 +9827,7 @@
 			)
 		)
 		(property "Value" "WS2812B-2020-V6"
-			(at 542.29 100.33 0)
+			(at 549.148 104.394 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9809,7 +9838,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 533.1352 115.57 0)
+			(at 545.8352 115.57 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9820,7 +9849,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 532.13 111.76 0)
+			(at 544.83 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9831,7 +9860,7 @@
 			)
 		)
 		(property "Description" "3.3 V-capable addressable RGB underglow LED"
-			(at 532.13 111.76 0)
+			(at 544.83 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10359,6 +10388,93 @@
 		)
 	)
 	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 513.08 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "08111b49-d0b4-4449-a4f1-9983617204fd")
+		(property "Reference" "D4"
+			(at 516.89 102.108 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "WS2812B-2020-V6"
+			(at 516.89 104.648 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
+			(at 514.0852 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 513.08 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "3.3 V-capable addressable RGB underglow LED"
+			(at 513.08 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c3c6b2e3-7ca3-4176-a451-e85d5b346b5e")
+		)
+		(pin "2"
+			(uuid "6e2edc29-0e05-443f-8232-f1d6159e943e")
+		)
+		(pin "3"
+			(uuid "37bf2a8a-f42d-4ecd-a8d6-128d4eeabe41")
+		)
+		(pin "4"
+			(uuid "e1edaff8-62c9-495c-8252-97aca5cbf52b")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "D4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Switch:SW_DIP_x01")
 		(at 44.45 35.56 90)
 		(unit 1)
@@ -10861,6 +10977,84 @@
 			(project "Hot_Wheels_Electronics"
 				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
 					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 513.08 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "18b29629-a1de-450d-8789-cb89064241ce")
+		(property "Reference" "#PWR0115"
+			(at 513.08 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 513.08 99.06 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 513.08 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 513.08 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 513.08 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "087f0e1b-b7ed-4c62-b3e9-2c12f2d15b19")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR0115")
 					(unit 1)
 				)
 			)
@@ -12223,6 +12417,84 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 483.87 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "40e21ac7-8699-4305-a834-de4edcd05884")
+		(property "Reference" "#PWR0114"
+			(at 483.87 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 483.87 99.06 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 483.87 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 483.87 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 483.87 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4f5dbb61-0cc4-4d91-85ea-95c11a64db07")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR0114")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 462.28 240.03 0)
 		(unit 1)
@@ -12458,7 +12730,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 532.13 119.38 0)
+		(at 544.83 119.38 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -12469,7 +12741,7 @@
 		(fields_autoplaced yes)
 		(uuid "49c9d50a-c080-4c99-af84-dcfea59ad487")
 		(property "Reference" "#PWR113"
-			(at 532.13 125.73 0)
+			(at 544.83 125.73 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12480,7 +12752,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 532.13 124.46 0)
+			(at 544.83 124.46 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -12490,7 +12762,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 532.13 119.38 0)
+			(at 544.83 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12501,7 +12773,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 532.13 119.38 0)
+			(at 544.83 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12512,7 +12784,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 532.13 119.38 0)
+			(at 544.83 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14037,6 +14309,171 @@
 		)
 	)
 	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 483.87 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "609a8992-9a1a-4c80-8811-700d0f84666c")
+		(property "Reference" "D3"
+			(at 487.68 102.108 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "WS2812B-2020-V6"
+			(at 487.68 104.648 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
+			(at 484.8752 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 483.87 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "3.3 V-capable addressable RGB underglow LED"
+			(at 483.87 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ab469a7c-bc29-4b00-87c0-3215999dc222")
+		)
+		(pin "2"
+			(uuid "f44cb81e-40dc-4a25-9df3-72d20a437c0d")
+		)
+		(pin "3"
+			(uuid "0e32c11e-d238-4900-b327-938519995c30")
+		)
+		(pin "4"
+			(uuid "09bb1126-a555-468f-9289-70897a7a1225")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "D3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 483.87 119.38 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "60b85ab5-140b-4e6f-8ad2-f9d11d0db5ac")
+		(property "Reference" "#PWR0116"
+			(at 483.87 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 483.87 124.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 483.87 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 483.87 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 483.87 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "3787a02b-6c94-4fb9-825d-d7a76d5c8849")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR0116")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 44.45 87.63 0)
 		(unit 1)
@@ -14267,6 +14704,84 @@
 			(project "Hot_Wheels_Electronics"
 				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
 					(reference "#PWR029")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 513.08 119.38 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6a083437-036f-4b90-aaae-3a538e765629")
+		(property "Reference" "#PWR0117"
+			(at 513.08 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 513.08 124.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 513.08 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 513.08 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 513.08 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c4ab172e-2454-4eef-b2ae-49a551c01f7b")
+		)
+		(instances
+			(project "Hot_Wheels_Electronics"
+				(path "/753fef37-370a-4893-8adb-358cd7fc1669"
+					(reference "#PWR0117")
 					(unit 1)
 				)
 			)
@@ -15833,10 +16348,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "86836eec-b8f6-4a24-9ad7-33c52188b5fb")
 		(property "Reference" "D1"
-			(at 462.28 97.79 0)
+			(at 455.93 102.108 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -15847,7 +16361,7 @@
 			)
 		)
 		(property "Value" "WS2812B-2020-V6"
-			(at 462.28 100.33 0)
+			(at 455.93 104.648 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -19529,7 +20043,7 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
-		(at 532.13 104.14 0)
+		(at 544.83 104.14 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -19540,7 +20054,7 @@
 		(fields_autoplaced yes)
 		(uuid "f5587ce0-7f72-495d-9346-db4f044eec2f")
 		(property "Reference" "#PWR112"
-			(at 532.13 107.95 0)
+			(at 544.83 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19551,7 +20065,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 532.13 99.06 0)
+			(at 544.83 99.06 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -19561,7 +20075,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 532.13 104.14 0)
+			(at 544.83 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19572,7 +20086,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 532.13 104.14 0)
+			(at 544.83 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19583,7 +20097,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 532.13 104.14 0)
+			(at 544.83 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
